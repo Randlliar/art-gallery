@@ -1,11 +1,12 @@
-<div class="gallery-card" >
-  <div class="gallery-card-image" style="background-image: url('/assets/images/galley_image.png')">
+<div class="gallery-card" *ngFor="let item of items">
+  <div class="gallery-card-image">
+    <img src="https://www.artic.edu/iiif/2/{{item.image_id}}/full/387,/0/default.jpg" alt="Image">
   </div>
   <div class="gallery-card-description">
     <div class="gallery-card-description-text">
-      <div class="gallery-card-description__name">Charles V, bust length...</div>
-      <div class="gallery-card-description__author">Giovanni Britto</div>
-      <div class="gallery-card-description__state">Public</div>
+      <div class="gallery-card-description__name">{{ item.title | slice: 0 : 20 }}...</div>
+      <div class="gallery-card-description__author">{{ item.artist_title }}</div>
+      <div class="gallery-card-description__state" *ngIf="item.is_public_domain">Public</div>
     </div>
     <div class="gallery-card-description-favorites">
       <button>
@@ -16,39 +17,11 @@
 </div>
 
 
-<div class="gallery-card" >
-  <div class="gallery-card-image" style="background-image: url('/assets/images/galley_image.png')">
-  </div>
-  <div class="gallery-card-description">
-    <div class="gallery-card-description-text">
-      <div class="gallery-card-description__name">Charles V, bust length...</div>
-      <div class="gallery-card-description__author">Giovanni Britto</div>
-      <div class="gallery-card-description__state">Public</div>
-    </div>
-    <div class="gallery-card-description-favorites">
-      <button>
-        <img src="/assets/images/icons/bookmark.png" alt="favorites">
-      </button>
-    </div>
-  </div>
-</div>
 
 
-<div class="gallery-card" >
-  <div class="gallery-card-image" style="background-image: url('/assets/images/galley_image.png')">
-  </div>
-  <div class="gallery-card-description">
-    <div class="gallery-card-description-text">
-      <div class="gallery-card-description__name">Charles V, bust length...</div>
-      <div class="gallery-card-description__author">Giovanni Britto</div>
-      <div class="gallery-card-description__state">Public</div>
-    </div>
-    <div class="gallery-card-description-favorites">
-      <button>
-        <img src="/assets/images/icons/bookmark.png" alt="favorites">
-      </button>
-    </div>
-  </div>
-</div>
+
+
+
+
 
 
