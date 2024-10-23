@@ -1,0 +1,59 @@
+.details {
+  margin: 120px 0;
+  .container {
+    display: flex;
+    gap: 80px;
+
+    .details-image {
+      width: 497px;
+      height: 570px;
+      background-image: url("/assets/images/galley_image.png");
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    .details-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      font-family: Lexend Deca, sans-serif;
+      font-weight: 400;
+      color: rgb(57, 57, 57);
+      max-width: 640px;
+
+      .details-text-about {
+
+        .details-about-description {
+          font-size: 32px;
+          margin-bottom: 32px;
+        }
+
+        .details-about-name {
+          color: rgb(224, 164, 73);
+          font-size: 24px;
+          margin-bottom: 16px;
+        }
+
+        .details-about-age {
+          font-size: 16px;
+          font-weight: 700;
+        }
+      }
+
+      .details-text-overview {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        span {
+          color: rgb(224, 164, 73);
+        }
+
+        h1 {
+          font-size: 32px;
+          margin-bottom: 16px;
+        }
+      }
+    }
+  }
+}
