@@ -1,48 +1,63 @@
 .small-card {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 23px 13px;
   width: 390px;
   background: rgb(255, 255, 255);
   box-sizing: border-box;
   border: 1px solid rgb(240, 241, 241);
 
-  .small-card-description {
-    font-family: Lexend Deca, sans-serif;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-
-    .small-card-description__name {
-      font-size: 18px;
-      font-weight: 500;
-      margin-bottom: 10px;
-    }
-    .small-card-description__author {
-      font-size: 15px;
-      font-weight: 400;
-      color: rgba(224, 164, 73, 1);
-      margin-bottom: 18px;
-    }
-    .small-card-description__state {
-      font-size: 15px;
-      font-weight: 700;
-    }
+  .small-card-image {
+    margin-right: 16px;
   }
 
-  .small-card-add-to-favorites {
-    button {
-      border: none;
-      background: rgb(249, 249, 249);
-      border-radius: 50%;
-      width: 59px;
-      height: 59px;
+  .small-card-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
 
-      &:hover {
-        background: rgba(251, 215, 178, 0.3);
-        cursor: pointer;
+    .small-card-description {
+      font-family: Lexend Deca, sans-serif;
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      text-align: left;
+
+      .small-card-description__name {
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 10px;
+      }
+
+      .small-card-description__author {
+        font-size: 15px;
+        font-weight: 400;
+        color: rgba(224, 164, 73, 1);
+        margin-bottom: 18px;
+      }
+
+      .small-card-description__state {
+        font-size: 15px;
+        font-weight: 700;
+      }
+    }
+
+    .small-card-add-to-favorites {
+      button {
+        border: none;
+        background: rgb(249, 249, 249);
+        border-radius: 50%;
+        width: 59px;
+        height: 59px;
+
+        &:hover {
+          background: rgba(251, 215, 178, 0.3);
+          cursor: pointer;
+        }
       }
     }
   }
+
+
 }
