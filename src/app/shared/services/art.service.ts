@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs";
 import {ArtType} from "../../types/art";
+import {ActiveParamsType} from "../../types/active-param.type";
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,16 @@ import {ArtType} from "../../types/art";
 export class ArtService {
   constructor(private http: HttpClient) { }
 
-  getArts(page: number, limit: number): Observable<ArtType> {
-    return this.http.get<ArtType>(environment.api + `?page=${page}&limit=${limit}`)
+
+  getArts(params: ActiveParamsType): Observable<ArtType[]> {
+    return this.http.get<ArtType[]>(`${environment.api}?page=${params}`, {
+      params: params
+    })
   }
 
-  getArt(id: number): Observable<ArtType> {
-    return this.http.get<ArtType>(environment.api + `?id=${id}`)
-  }
+getArt(id: number): Observable<ArtType> {
+    return this.http.get<ArtType>(`${environment.api}/${id}`)
+}
+
+
 }
