@@ -1,12 +1,12 @@
-<div class="gallery-card" *ngFor="let item of items">
+<div class="gallery-card" id="{{art.id}}">
   <div class="gallery-card-image">
-    <img src="https://www.artic.edu/iiif/2/{{item.image_id}}/full/387,/0/default.jpg" alt="Image">
+    <img src="https://www.artic.edu/iiif/2/{{art.image_id}}/full/387,/0/default.jpg" alt="Image">
   </div>
   <div class="gallery-card-description">
     <div class="gallery-card-description-text">
-      <div class="gallery-card-description__name">{{ item.title | slice: 0 : 20 }}...</div>
-      <div class="gallery-card-description__author">{{ item.artist_title }}</div>
-      <div class="gallery-card-description__state" *ngIf="item.is_public_domain">Public</div>
+      <div class="gallery-card-description__name">{{ art.title | slice: 0 : 20 }}...</div>
+      <div class="gallery-card-description__author">{{ art.artist_title }}</div>
+      <div class="gallery-card-description__state" *ngIf="art.is_public_domain">Public</div>
     </div>
     <div class="gallery-card-description-favorites">
       <button>

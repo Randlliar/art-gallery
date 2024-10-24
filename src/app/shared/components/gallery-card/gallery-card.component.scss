@@ -3,8 +3,12 @@
   position: relative;
 
   .gallery-card-image {
-    width: 387px;
-    height: 444px;
+
+    img {
+      width: 387px;
+      height: 444px;
+      background-size: cover;
+    }
   }
 
   .gallery-card-description {

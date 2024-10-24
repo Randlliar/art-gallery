@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ArtService} from "../../services/art.service";
 import {NgForOf, NgIf, SlicePipe} from "@angular/common";
 import {ArtType} from "../../../types/art";
@@ -17,19 +17,12 @@ import {ArtType} from "../../../types/art";
 
 export class GalleryCardComponent implements OnInit {
 
-  items: ArtType[] = [];
-  id: number = 0;
-  constructor(private artService: ArtService) {
+  @Input() art!: ArtType;
+  constructor() {
   }
 
   ngOnInit() {
-    this.artService.getArts(1, 3)
-      .subscribe((item: any) => {
-        this.id = item.data.filter((id: any) => id.id);
-        console.log(this.id)
-        this.items = item.data;
 
-      })
   }
 
 }
