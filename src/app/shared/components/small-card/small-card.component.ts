@@ -1,6 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ArtService} from "../../services/art.service";
 import {NgForOf, NgIf, SlicePipe,} from "@angular/common";
+import {ArtType} from "../../../types/art";
 
 @Component({
   selector: 'small-card',
@@ -15,17 +16,12 @@ import {NgForOf, NgIf, SlicePipe,} from "@angular/common";
 })
 export class SmallCardComponent implements OnInit{
 
-  data: any = [];
+  @Input() art!: ArtType
+
   constructor(private artService: ArtService) {
   }
 
   ngOnInit() {
-    this.artService.getArts(1, 9)
-      .pipe()
-      .subscribe((data: any) => {
-        console.log(data.data)
-        this.data = data.data;
-      })
 
   }
 
