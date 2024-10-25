@@ -1,0 +1,41 @@
+.favorites {
+  .container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: Lexend Deca, sans-serif;
+    text-align: center;
+
+    .favorites-main-title {
+      color: rgb(57, 57, 57);
+      font-size: 64px;
+      font-weight: 700;
+      width: 684px;
+      margin: 120px 0;
+
+      span {
+        color: rgb(241, 121, 0);
+      }
+    }
+
+    .favorites-title {
+      color: rgb(224, 164, 73);
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    .favorites__pre-title {
+      color: rgb(57, 57, 57);
+      font-size: 32px;
+      margin-bottom: 40px;
+    }
+
+    .small-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 152px;
+    }
+
+  }
+}
