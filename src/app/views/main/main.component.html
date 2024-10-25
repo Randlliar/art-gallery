@@ -30,7 +30,7 @@
       <div class="other-gallery__pre-title">Topics for you</div>
       <div class="other-gallery__title">Our special gallery</div>
       <div class="small-cards">
-        <small-card [art]="art" *ngFor="let art of arts| slice:3:arts.length"></small-card>
+A        <small-card (click)="getMore(art.id)" [art]="art" *ngFor="let art of arts| slice:3:arts.length"></small-card>
       </div>
     </section>
   </div>
