@@ -7,8 +7,27 @@
     .details-image {
       width: 497px;
       height: 570px;
-      background-size: cover;
+      background-size: inherit;
       background-repeat: no-repeat;
+      position: relative;
+
+      .details-add-to-favorites {
+        position: absolute;
+        border: none;
+        background: rgb(249, 249, 249);
+        border-radius: 50%;
+        width: 59px;
+        height: 59px;
+        align-content: center;
+        cursor: pointer;
+        text-align: center;
+        right: 16px;
+        top: 16px;
+
+        &.active {
+          background: rgba(251, 215, 178, 0.3);
+        }
+      }
     }
 
     .details-text {

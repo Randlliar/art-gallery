@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ArtService} from "../../../shared/services/art.service";
 import {ArtType} from "../../../types/art";
 import {ActivatedRoute} from "@angular/router";
-import {ArrayType} from "@angular/compiler";
 import {NgIf, SlicePipe} from "@angular/common";
+import {FavoritesService} from "../../../shared/services/favorites.service";
 
 @Component({
   selector: 'app-details',
@@ -21,6 +21,7 @@ export class DetailsComponent implements OnInit{
 
   constructor(private artService: ArtService,
               private route: ActivatedRoute,
+              private favoritesService: FavoritesService
              ) {
 
   }
@@ -29,12 +30,28 @@ export class DetailsComponent implements OnInit{
     this.route.params.subscribe(event => {
       this.artService.getArt(+event['id']).subscribe((item: any) => {
        if (item.data) {
-         const str = item.data.artist_display.split(',');
+         // const str = item.data.artist_display.split(',');
          this.art = item.data
        }
       })
     });
   }
+
+
+  addToFavorites(event: Event,item: any): void {
+    event.stopPropagation();
+    this.favoritesService.addFavorite(item);
+  }
+
+  removeFromFavorites(event: Event,itemId: number): void {
+    event.stopPropagation();
+    this.favoritesService.removeFromFavorites(itemId);
+  }
+
+  isFavorite(itemId: number): boolean {
+    return this.favoritesService.isFavorite(itemId);
+  }
+
 
 
 }
