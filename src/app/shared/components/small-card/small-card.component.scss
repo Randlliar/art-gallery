@@ -51,17 +51,16 @@
     }
 
     .small-card-add-to-favorites {
-      button {
-        border: none;
-        background: rgb(249, 249, 249);
-        border-radius: 50%;
-        width: 59px;
-        height: 59px;
+      border: none;
+      background: rgb(249, 249, 249);
+      border-radius: 50%;
+      width: 59px;
+      height: 59px;
+      align-content: center;
+      cursor: pointer;
 
-        &:hover {
-          background: rgba(251, 215, 178, 0.3);
-          cursor: pointer;
-        }
+      &.active {
+        background: rgba(251, 215, 178, 0.3);
       }
     }
   }

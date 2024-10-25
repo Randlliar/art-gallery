@@ -1,7 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {ArtService} from "../../services/art.service";
 import {NgForOf, NgIf, SlicePipe,} from "@angular/common";
 import {ArtType} from "../../../types/art";
+import {FavoritesService} from "../../services/favorites.service";
 
 @Component({
   selector: 'small-card',
@@ -17,12 +17,27 @@ import {ArtType} from "../../../types/art";
 export class SmallCardComponent implements OnInit{
 
   @Input() art!: ArtType
+  @Input() arts!: ArtType[]
 
-  constructor(private artService: ArtService) {
+  constructor(private favoritesService: FavoritesService) {
   }
 
   ngOnInit() {
 
+  }
+
+  addToFavorites(event: Event,item: any): void {
+    event.stopPropagation();
+    this.favoritesService.addFavorite(item);
+  }
+
+  removeFromFavorites(event: Event,itemId: number): void {
+    event.stopPropagation();
+    this.favoritesService.removeFromFavorites(itemId);
+  }
+
+  isFavorite(itemId: number): boolean {
+    return this.favoritesService.isFavorite(itemId);
   }
 
 }
