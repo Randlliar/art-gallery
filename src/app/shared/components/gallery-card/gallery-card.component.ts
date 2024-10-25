@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ArtService} from "../../services/art.service";
 import {NgForOf, NgIf, SlicePipe} from "@angular/common";
 import {ArtType} from "../../../types/art";
+import {FavoritesService} from "../../services/favorites.service";
 
 @Component({
   selector: 'gallery-card',
@@ -18,11 +18,24 @@ import {ArtType} from "../../../types/art";
 export class GalleryCardComponent implements OnInit {
 
   @Input() art!: ArtType;
-  constructor() {
-  }
+
+  constructor(private favoritesService: FavoritesService) {}
 
   ngOnInit() {
+  }
 
+  addToFavorites(event: Event,item: any): void {
+    event.stopPropagation();
+    this.favoritesService.addFavorite(item);
+  }
+
+  removeFromFavorites(event: Event,itemId: number): void {
+    event.stopPropagation();
+    this.favoritesService.removeFromFavorites(itemId);
+  }
+
+  isFavorite(itemId: number): boolean {
+    return this.favoritesService.isFavorite(itemId);
   }
 
 }

@@ -8,10 +8,9 @@
       <div class="gallery-card-description__author">{{ art.artist_title }}</div>
       <div class="gallery-card-description__state" *ngIf="art.is_public_domain">Public</div>
     </div>
-    <div class="gallery-card-description-favorites">
-      <button>
+    <div class="gallery-card-description-favorites " (click)="isFavorite(art.id) ? removeFromFavorites($event,art.id) : addToFavorites($event,art)"
+         [class.active]="isFavorite(art.id) ? 'favorite' : ''">
         <img src="/assets/images/icons/bookmark.png" alt="favorites">
-      </button>
     </div>
   </div>
 </div>

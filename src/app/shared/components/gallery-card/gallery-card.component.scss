@@ -34,12 +34,14 @@
         font-size: 18px;
         font-weight: 500;
       }
+
       .gallery-card-description__author {
         font-size: 15px;
         font-weight: 400;
         color: rgba(224, 164, 73, 1);
         margin-bottom: 12px;
       }
+
       .gallery-card-description__state {
         font-size: 15px;
         font-weight: 700;
@@ -47,17 +49,16 @@
     }
 
     .gallery-card-description-favorites {
-      button {
-        border: none;
-        background: rgb(249, 249, 249);
-        border-radius: 50%;
-        width: 59px;
-        height: 59px;
+      border: none;
+      background: rgb(249, 249, 249);
+      border-radius: 50%;
+      width: 59px;
+      height: 59px;
+      cursor: pointer;
+      align-content: center;
 
-        &:hover {
-          background: rgba(251, 215, 178, 0.3);
-          cursor: pointer;
-        }
+      &.active {
+        background: rgba(251, 215, 178, 0.3);
       }
     }
   }
