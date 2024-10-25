@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {ArtService} from "../../../shared/services/art.service";
-import {ArtType} from "../../../types/art";
-import {ActivatedRoute} from "@angular/router";
 import {NgIf, SlicePipe} from "@angular/common";
-import {FavoritesService} from "../../../shared/services/favorites.service";
+import {ArtType} from "@type/art.type";
+import {ArtService} from "@services/art.service";
+import {ActivatedRoute} from "@angular/router";
+import {FavoritesService} from "@services/favorites.service";
 
 @Component({
   selector: 'app-details',

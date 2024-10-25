@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs";
-import {ArtType} from "../../types/art";
-import {ActiveParamsType} from "../../types/active-param.type";
+import {ArtType} from "@type/art.type";
+import {ActiveParamsType} from "@type/active-param.type";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,5 @@ export class ArtService {
 getArt(id: number): Observable<ArtType> {
     return this.http.get<ArtType>(`${environment.api}/${id}`)
 }
-
 
 }

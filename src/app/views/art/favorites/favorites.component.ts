@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForOf, SlicePipe} from "@angular/common";
-import {SmallCardComponent} from "../../../shared/components/small-card/small-card.component";
-import {ArtType} from "../../../types/art";
-import {FavoritesService} from "../../../shared/services/favorites.service";
 import {Router} from "@angular/router";
+import {ArtType} from "@type/art.type";
+import {SmallCardComponent} from "@components/small-card/small-card.component";
+import {FavoritesService} from "@services/favorites.service";
 
 @Component({
   selector: 'app-favorites',

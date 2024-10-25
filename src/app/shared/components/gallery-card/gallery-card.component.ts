@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgForOf, NgIf, SlicePipe} from "@angular/common";
-import {ArtType} from "../../../types/art";
-import {FavoritesService} from "../../services/favorites.service";
+import {ArtType} from "@type/art.type";
+import {FavoritesService} from "@services/favorites.service";
 
 @Component({
   selector: 'gallery-card',
