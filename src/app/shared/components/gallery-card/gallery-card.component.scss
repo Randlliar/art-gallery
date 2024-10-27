@@ -1,64 +1,88 @@
 .gallery-card {
-  box-sizing: border-box;
-  position: relative;
 
-  .gallery-card-image {
+  .container {
+    box-sizing: border-box;
+    position: relative;
 
-    img {
-      width: 387px;
-      height: 444px;
-      background-size: cover;
+    .gallery-card-image {
+
+      img {
+        width: 387px;
+        height: 444px;
+        background-size: cover;
+      }
+    }
+
+    .gallery-card-description {
+      position: absolute;
+      width: 286px;
+      height: 90px;
+      padding: 21px 24px;
+      background: #fff;
+      bottom: -70px;
+      left: calc(50% - 170px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .gallery-card-description-text {
+        font-family: 'Lexend Deca', sans-serif;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+
+        .gallery-card-description__name {
+          font-size: 18px;
+          font-weight: 500;
+        }
+
+        .gallery-card-description__author {
+          font-size: 15px;
+          font-weight: 400;
+          color: rgba(224, 164, 73, 1);
+          margin-bottom: 12px;
+        }
+
+        .gallery-card-description__state {
+          font-size: 15px;
+          font-weight: 700;
+        }
+      }
+
+      .gallery-card-description-favorites {
+        border: none;
+        background: #f9f9f9;
+        border-radius: 50%;
+        width: 59px;
+        height: 59px;
+        cursor: pointer;
+        align-content: center;
+
+        &.active {
+          background: rgba(251, 215, 178, 0.3);
+        }
+      }
     }
   }
+}
 
-  .gallery-card-description {
-    position: absolute;
-    width: 286px;
-    height: 90px;
-    padding: 21px 24px;
-    background: rgb(255, 255, 255);
-    bottom: -70px;
-    left: calc(50% - 170px);
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+@media (max-width: 1340px) {
+  .gallery-card {
+    .container {
+      .gallery-card-image {
 
-    .gallery-card-description-text {
-      font-family: Lexend Deca, sans-serif;
-      display: flex;
-      align-items: flex-start;
-      flex-direction: column;
-
-      .gallery-card-description__name {
-        font-size: 18px;
-        font-weight: 500;
+        img {
+          width: 300px;
+          height: 400px;
+          background-size: cover;
+        }
       }
 
-      .gallery-card-description__author {
-        font-size: 15px;
-        font-weight: 400;
-        color: rgba(224, 164, 73, 1);
-        margin-bottom: 12px;
-      }
-
-      .gallery-card-description__state {
-        font-size: 15px;
-        font-weight: 700;
-      }
-    }
-
-    .gallery-card-description-favorites {
-      border: none;
-      background: rgb(249, 249, 249);
-      border-radius: 50%;
-      width: 59px;
-      height: 59px;
-      cursor: pointer;
-      align-content: center;
-
-      &.active {
-        background: rgba(251, 215, 178, 0.3);
+      .gallery-card-description {
+        width: 252px;
+        height: 90px;
+        left: calc(50% - 150px);
       }
     }
   }

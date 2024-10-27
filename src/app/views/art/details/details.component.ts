@@ -30,7 +30,6 @@ export class DetailsComponent implements OnInit{
     this.route.params.subscribe(event => {
       this.artService.getArt(+event['id']).subscribe((item: any) => {
        if (item.data) {
-         // const str = item.data.artist_display.split(',');
          this.art = item.data
        }
       })
@@ -38,7 +37,7 @@ export class DetailsComponent implements OnInit{
   }
 
 
-  addToFavorites(event: Event,item: any): void {
+  addToFavorites(event: Event,item: ArtType): void {
     event.stopPropagation();
     this.favoritesService.addFavorite(item);
   }

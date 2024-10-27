@@ -10,4 +10,5 @@ export type ArtType = {
   isInFavorite?: boolean;
   place_of_origin?: string;
   credit_line?: string;
+  department_title?: string;
 }

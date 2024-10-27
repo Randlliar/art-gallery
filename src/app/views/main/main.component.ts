@@ -1,13 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GalleryCardComponent} from "@components/gallery-card/gallery-card.component";
 import {SmallCardComponent} from "@components/small-card/small-card.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ArtService} from "@services/art.service";
 import {NgForOf, NgIf, SlicePipe} from "@angular/common";
 import {ActiveParamsType} from "@type/active-param.type";
-import {debounceTime} from "rxjs";
+import {debounceTime, distinctUntilChanged, switchMap} from "rxjs";
 import {LoaderService} from "@services/loader.service";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ArtType} from "@type/art.type";
 
 @Component({
@@ -27,10 +27,13 @@ import {ArtType} from "@type/art.type";
 })
 export class MainComponent implements OnInit {
   arts: ArtType[] = [];
-  filteredArts: ArtType[] = [];
+  amountOfPages!: number;
 
-  pages: number[] = []
   activeParams: ActiveParamsType = {page: 1};
+
+  searchControl = new FormControl('');
+  artworks: ArtType[] = [];
+  isLoading: boolean = false;
 
   constructor(private router: Router,
               private artService: ArtService,
@@ -42,20 +45,38 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.subscribeToArtChanges();
     this.processContent();
+
+    this.searchControl.valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        switchMap(query => {
+          this.isLoading = true;
+          return this.artService.searchArtworks(query!);
+        })
+      )
+      .subscribe(
+        (response) => {
+          this.artworks = response.data;  // Сохраняем данные из API
+          this.isLoading = false;
+        },
+        (error) => {
+          console.error('Ошибка при получении данных:', error);
+          this.isLoading = false;
+        }
+      );
   }
 
- private subscribeToArtChanges() {
+  private subscribeToArtChanges() {
     this.artService.getArts(this.activeParams.page)
-      .subscribe((item: any) => {
-       this.processContent();
-      });
+      .subscribe(() => this.processContent());
   }
 
   private processContent() {
     this.loaderService.show();
     this.activatedRoute.queryParams
       .pipe(
-        debounceTime(500)
+        debounceTime(500),
       )
       .subscribe(params => {
         if (params['page']) {
@@ -71,16 +92,15 @@ export class MainComponent implements OnInit {
       .subscribe((data: any) => {
         this.loaderService.show();
 
-        this.pages = []
+        this.amountOfPages = data.pagination.total_pages;
         this.arts = data.data;
-        for (let i = 1; i <= data.pagination.total_pages; i++) {
-          this.pages.push(i);
-        }
+
         this.loaderService.hide();
 
       })
   }
- public openPage(page: number) {
+
+  public openPage(page: number) {
     this.activeParams.page = page;
     this.router.navigate([''], {
       queryParams: this.activeParams
@@ -89,13 +109,12 @@ export class MainComponent implements OnInit {
 
   public openNextPage() {
     this.loaderService.show();
-    if (this.activeParams.page && this.activeParams.page < this.pages.length) {
+    if (this.activeParams.page && this.activeParams.page < this.amountOfPages) {
       this.activeParams.page++;
       this.router.navigate([''], {
         queryParams: this.activeParams
       });
       this.loaderService.hide();
-
     }
   }
 
@@ -109,10 +128,14 @@ export class MainComponent implements OnInit {
   }
 
   public getMore(id: number) {
-        this.router.navigate([`/details/${id}`], {
-          queryParams: null
-        });
+    this.router.navigate([`/details/${id}`], {
+      queryParams: null
+    });
   }
 
+
+  getSearch() {
+
+  }
 
 }

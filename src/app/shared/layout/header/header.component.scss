@@ -11,13 +11,19 @@ header.header {
       text-decoration: none;
     }
 
-    .favorites {
+    .navigate {
       display: flex;
       align-items: center;
       text-decoration: none;
       cursor: pointer;
+      gap: 16px;
 
-      .favorites-text {
+      a {
+        display: flex;
+        align-items: center;
+      }
+
+      .navigate-text {
         color: rgb(255, 255, 255);
         margin-left: 8px;
         font-family: Inter, sans-serif;
@@ -29,4 +35,6 @@ header.header {
   }
 }
 
+@media (max-width: 1024px) {
 
+}

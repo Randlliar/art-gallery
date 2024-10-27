@@ -26,7 +26,7 @@ export class SmallCardComponent implements OnInit{
 
   }
 
-  addToFavorites(event: Event,item: any): void {
+  addToFavorites(event: Event,item: ArtType): void {
     event.stopPropagation();
     this.favoritesService.addFavorite(item);
   }

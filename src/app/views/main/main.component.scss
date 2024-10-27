@@ -8,7 +8,7 @@
     flex-direction: column;
 
     h1 {
-      font-family: Lexend Deca, sans-serif;
+      font-family: 'Lexend Deca', sans-serif;
       font-size: 64px;
       font-weight: 700;
       line-height: 80px;
@@ -25,7 +25,7 @@
       position: relative;
 
       input {
-        font-family: Inter, sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 14px;
         font-weight: 400;
         width: 730px;
@@ -50,14 +50,14 @@
 
       &::placeholder {
         color: rgba(57, 57, 57, 0.5);
-        font-family: Inter, sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 14px;
         font-weight: 400;
       }
     }
 
     .main-gallery {
-      font-family: Lexend Deca, sans-serif;
+      font-family: 'Lexend Deca', sans-serif;
       font-weight: 400;
       text-align: center;
 
@@ -91,7 +91,7 @@
         }
 
         .pagination-page {
-          font-family: Lexend Deca, sans-serif;
+          font-family: 'Lexend Deca', sans-serif;
           font-size: 18px;
           font-weight: 300;
           width: 30px;
@@ -102,27 +102,18 @@
           text-decoration: none;
           cursor: pointer;
 
-
-
           &.active {
             font-weight: 600;
             border-radius: 4px;
             background: rgb(241, 121, 0);
             color: rgb(255, 255, 255);
           }
-
-          //&:hover {
-          //  font-weight: 600;
-          //  border-radius: 4px;
-          //  background: rgb(241, 121, 0);
-          //  color: rgb(255, 255, 255);
-          //}
         }
       }
     }
 
     .other-gallery {
-      font-family: Lexend Deca, sans-serif;
+      font-family: 'Lexend Deca', sans-serif;
       font-weight: 400;
       text-align: center;
 
@@ -143,6 +134,18 @@
         gap: 16px;
         flex-wrap: wrap;
         margin-bottom: 120px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .main {
+    .container {
+      .main-gallery {
+        .main-gallery-cards {
+          gap: 30px;
+        }
       }
     }
   }
