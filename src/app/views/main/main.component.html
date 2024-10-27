@@ -4,16 +4,17 @@
     <div class="main-search">
       <input type="text" placeholder="Search art, artist, work..." [formControl]="searchControl">
     </div>
-    <div class="small-cards" *ngIf="artworks.length && !isLoading">
-      <small-card (click)="getMore(art.id)" [art]="art" *ngFor="let art of artworks"></small-card>
-    </div>
-    <div *ngIf="!artworks.length && searchControl.value && !isLoading">
-      <p>Ничего не найдено по запросу "{{ searchControl.value }}"</p>
-    </div>
+<!--    <ng-container *ngIf="isSearch()">-->
+
+
+<!--    <div *ngIf="!searchArts.length || searchArts.length < 1 && searchControl.value && !isLoading">-->
+<!--      <p>Ничего не найдено по запросу "{{ searchControl.value }}"</p>-->
+<!--    </div>-->
+<!--    </ng-container>-->
 
     <section class="main-gallery">
-      <div class="main-gallery__pre-title">Topics for you</div>
-      <div class="main-gallery__title">Our special gallery</div>
+        <div class="main-gallery__pre-title">Topics for you</div>
+        <div class="main-gallery__title">Our special gallery</div>
       <div class="main-gallery-cards">
         <gallery-card (click)="getMore(art.id)" [art]="art" *ngFor="let art of arts| slice:0:3"></gallery-card>
       </div>

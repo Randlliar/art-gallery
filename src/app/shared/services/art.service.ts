@@ -14,18 +14,22 @@ export class ArtService {
 
 
   getArts(params: ActiveParamsType): Observable<ArtType[]> {
-    return this.http.get<ArtType[]>(`${environment.api}?page=${params}`, {
-      params: params
-    })
+    const queryParams =  `?page=${params.page}`;
+    return this.http.get<ArtType[]>(`${environment.api}${queryParams}`);
+  }
+  getSomeArts(ids: string): Observable<ArtType[]> {
+    return this.http.get<ArtType[]>(`${environment.api}?ids=${ids}`);
   }
 
 getArt(id: number): Observable<ArtType> {
     return this.http.get<ArtType>(`${environment.api}/${id}`)
 }
 
-  searchArtworks(query: string): Observable<any> {
-    // Создаем URL для поиска по полям
-    const url = `${environment.api}?fields=id,title,artist_display,date_display,main_reference_number&q=${query}`;
-    return this.http.get(url);
+  getSearchArts(params: ActiveParamsType): Observable<ArtType[]> {
+    const isSearchMode = !!params?.query?.length;
+    const requestEndpoint = `${isSearchMode ? '/search' : ''}`;
+    const queryParams =  `?page=${params.page}${isSearchMode ? `&q=${params.query}` : ''}`;
+    return this.http.get<ArtType[]>(`${environment.api}${requestEndpoint}${queryParams}`);
   }
+
 }

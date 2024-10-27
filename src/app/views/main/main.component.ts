@@ -1,14 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {GalleryCardComponent} from "@components/gallery-card/gallery-card.component";
 import {SmallCardComponent} from "@components/small-card/small-card.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ArtService} from "@services/art.service";
 import {NgForOf, NgIf, SlicePipe} from "@angular/common";
 import {ActiveParamsType} from "@type/active-param.type";
-import {debounceTime, distinctUntilChanged, switchMap} from "rxjs";
+import {debounceTime, distinctUntilChanged, switchMap, tap} from "rxjs";
 import {LoaderService} from "@services/loader.service";
 import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ArtType} from "@type/art.type";
+import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 
 @Component({
   selector: 'app-main',
@@ -27,11 +28,15 @@ import {ArtType} from "@type/art.type";
 })
 export class MainComponent implements OnInit {
   arts: ArtType[] = [];
+  srt: string = '';
+  searchArts: ArtType[] = [];
   amountOfPages!: number;
 
   activeParams: ActiveParamsType = {page: 1};
 
   searchControl = new FormControl('');
+  isSearch = signal(false);
+
   artworks: ArtType[] = [];
   isLoading: boolean = false;
 
@@ -43,33 +48,8 @@ export class MainComponent implements OnInit {
 
 
   ngOnInit() {
-    this.subscribeToArtChanges();
     this.processContent();
-
-    this.searchControl.valueChanges
-      .pipe(
-        debounceTime(500),
-        distinctUntilChanged(),
-        switchMap(query => {
-          this.isLoading = true;
-          return this.artService.searchArtworks(query!);
-        })
-      )
-      .subscribe(
-        (response) => {
-          this.artworks = response.data;  // Сохраняем данные из API
-          this.isLoading = false;
-        },
-        (error) => {
-          console.error('Ошибка при получении данных:', error);
-          this.isLoading = false;
-        }
-      );
-  }
-
-  private subscribeToArtChanges() {
-    this.artService.getArts(this.activeParams.page)
-      .subscribe(() => this.processContent());
+    this.handleSearchInput();
   }
 
   private processContent() {
@@ -88,15 +68,36 @@ export class MainComponent implements OnInit {
   }
 
   private getArts() {
-    this.artService.getArts(this.activeParams.page)
+    this.loaderService.show();
+    this.artService.getArts(this.activeParams)
       .subscribe((data: any) => {
-        this.loaderService.show();
-
         this.amountOfPages = data.pagination.total_pages;
         this.arts = data.data;
+        this.loaderService.hide();
+      })
+  }
+
+
+  private getSomeArts(ids: string) {
+    this.artService.getSomeArts(ids)
+      .subscribe((data: any) => {
+        this.arts = data.data
+      })
+  }
+
+  private getSearchArts() {
+    this.loaderService.show();
+    this.artService.getSearchArts(this.activeParams)
+      .subscribe((data: any) => {
+        this.searchArts = data.data;
+        const itemId: number[] = []
+        data.data.map((item: ArtType) => {
+          itemId.push(item.id)
+          this.srt = itemId.join()
+        })
+        this.getSomeArts(this.srt)
 
         this.loaderService.hide();
-
       })
   }
 
@@ -105,6 +106,7 @@ export class MainComponent implements OnInit {
     this.router.navigate([''], {
       queryParams: this.activeParams
     });
+
   }
 
   public openNextPage() {
@@ -134,8 +136,26 @@ export class MainComponent implements OnInit {
   }
 
 
-  getSearch() {
+  private handleSearchInput(): void {
+    this.searchControl.valueChanges
+      .pipe(
+        // Add unsubscription pipe
+        debounceTime(500),
+        distinctUntilChanged(),
+        tap((query) => {
+          if (query?.length) {
+            this.isSearch.set(true);
+          } else {
+            this.isSearch.set(false);
+          }
 
+          this.isLoading = true;
+          this.activeParams.page = 1;
+          this.activeParams.query = query ?? '';
+          this.getSearchArts();
+
+        }),
+      ).subscribe();
   }
 
 }
