@@ -161,6 +161,17 @@
 @media (max-width: 767px) {
   .main {
     .container {
+      .main-title {
+        font-size: 36px;
+        line-height: normal;
+      }
+
+      .main-search {
+        input {
+          width: 420px;
+        }
+      }
+
       .main-gallery {
         .main-gallery-cards {
           gap: 30px;

@@ -16,7 +16,7 @@
         <div class="main-gallery__pre-title">Topics for you</div>
         <div class="main-gallery__title">Our special gallery</div>
       <div class="main-gallery-cards">
-        <gallery-card (click)="getMore(art.id)" [art]="art" *ngFor="let art of arts| slice:0:3"></gallery-card>
+        <gallery-card class="main-gallery-card" (click)="getMore(art.id)" [art]="art"  *ngFor="let art of arts| slice:0:3"></gallery-card>
       </div>
       <div class="pagination-pages">
         <svg style="transform: rotate(180deg)" width="10" height="15" viewBox="0 0 10 15" fill="none"
