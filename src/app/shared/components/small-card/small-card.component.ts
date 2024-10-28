@@ -14,7 +14,7 @@ import {FavoritesService} from "@services/favorites.service";
   templateUrl: './small-card.component.html',
   styleUrl: './small-card.component.scss'
 })
-export class SmallCardComponent implements OnInit{
+export class SmallCardComponent{
 
   @Input() art!: ArtType
   @Input() arts!: ArtType[]
@@ -22,9 +22,6 @@ export class SmallCardComponent implements OnInit{
   constructor(private favoritesService: FavoritesService) {
   }
 
-  ngOnInit() {
-
-  }
 
   addToFavorites(event: Event,item: ArtType): void {
     event.stopPropagation();
