@@ -1,5 +1,6 @@
 .details {
   margin: 120px 0;
+
   .container {
     display: flex;
     gap: 80px;
@@ -71,6 +72,44 @@
           font-size: 32px;
           margin-bottom: 16px;
         }
+      }
+    }
+  }
+}
+
+@media (max-width: 1300px) {
+.details {
+  .container {
+    .details-image {
+      margin: 0 40px;
+      background-size: cover;
+    }
+  }
+}
+}
+
+@media (max-width: 1023px) {
+  .details {
+    .container {
+      gap: 30px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .details {
+    .container {
+      gap: 30px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .details-image {
+        width: 95%;
+      }
+
+      .details-text {
+        margin: 0 10px;
       }
     }
   }

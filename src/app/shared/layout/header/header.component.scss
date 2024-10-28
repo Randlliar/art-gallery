@@ -21,6 +21,7 @@ header.header {
       a {
         display: flex;
         align-items: center;
+        text-decoration: none;
       }
 
       .navigate-text {
@@ -35,6 +36,12 @@ header.header {
   }
 }
 
-@media (max-width: 1024px) {
-
+@media (max-width: 510px) {
+  header.header {
+    .container {
+      .navigate {
+        display: none;
+      }
+    }
+  }
 }
