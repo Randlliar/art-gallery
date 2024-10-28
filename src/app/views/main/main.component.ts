@@ -5,11 +5,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {ArtService} from "@services/art.service";
 import {NgForOf, NgIf, SlicePipe} from "@angular/common";
 import {ActiveParamsType} from "@type/active-param.type";
-import {debounceTime, distinctUntilChanged, switchMap, tap} from "rxjs";
+import {debounceTime, distinctUntilChanged, tap} from "rxjs";
 import {LoaderService} from "@services/loader.service";
 import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ArtType} from "@type/art.type";
-import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 
 @Component({
   selector: 'app-main',
@@ -80,9 +79,7 @@ export class MainComponent implements OnInit {
 
   private getSomeArts(ids: string) {
     this.artService.getSomeArts(ids)
-      .subscribe((data: any) => {
-        this.arts = data.data
-      })
+      .subscribe((data: any) => this.arts = data.data)
   }
 
   private getSearchArts() {
@@ -90,13 +87,8 @@ export class MainComponent implements OnInit {
     this.artService.getSearchArts(this.activeParams)
       .subscribe((data: any) => {
         this.searchArts = data.data;
-        const itemId: number[] = []
-        data.data.map((item: ArtType) => {
-          itemId.push(item.id)
-          this.srt = itemId.join()
-        })
+        this.srt = data.data.flatMap((item: ArtType) => item.id).join();
         this.getSomeArts(this.srt)
-
         this.loaderService.hide();
       })
   }
