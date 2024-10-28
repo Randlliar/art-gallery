@@ -132,6 +132,7 @@
       .small-cards {
         display: flex;
         gap: 16px;
+        justify-content: center;
         flex-wrap: wrap;
         margin-bottom: 120px;
       }
@@ -145,6 +146,31 @@
       .main-gallery {
         .main-gallery-cards {
           gap: 30px;
+
+          .main-gallery-card {
+            &:last-child {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .main {
+    .container {
+      .main-gallery {
+        .main-gallery-cards {
+          gap: 30px;
+
+          .main-gallery-card {
+            display: none;
+            &:first-child {
+              display: flex;
+            }
+          }
         }
       }
     }
