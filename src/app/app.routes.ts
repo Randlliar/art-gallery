@@ -10,8 +10,8 @@ export const routes: Routes = [
     component: LayoutComponent,
     children: [
       {path: '', component: MainComponent},
-      {path: 'details/:id', component: DetailsComponent},
-      {path: 'favorites', component: FavoritesComponent},
+      {path: 'details/:id', loadComponent: () => import('./views/art/details/details.component').then(c => c.DetailsComponent)},
+      {path: 'favorites', loadComponent: () => import('./views/art/favorites/favorites.component').then(c => c.FavoritesComponent)},
     ]
   }
 ];
