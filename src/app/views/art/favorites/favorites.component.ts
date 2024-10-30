@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NgForOf, SlicePipe} from "@angular/common";
 import {Router} from "@angular/router";
-import {ArtType} from "@type/art.type";
+import {ArtsType} from "@type/arts.type";
 import {SmallCardComponent} from "@components/small-card/small-card.component";
 import {FavoritesService} from "@services/favorites.service";
 
@@ -17,7 +17,7 @@ import {FavoritesService} from "@services/favorites.service";
   styleUrl: './favorites.component.scss'
 })
 export class FavoritesComponent implements OnInit{
-  arts: ArtType[] = [];
+  arts: ArtsType[] = [];
   constructor(private router: Router,
               private favoritesService: FavoritesService) {
   }
