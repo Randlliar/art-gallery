@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NgIf, SlicePipe} from "@angular/common";
-import {ArtType} from "@type/art.type";
+import {ArtsType} from "@type/arts.type";
 import {ArtService} from "@services/art.service";
 import {ActivatedRoute} from "@angular/router";
 import {FavoritesService} from "@services/favorites.service";
@@ -15,34 +15,33 @@ import {FavoritesService} from "@services/favorites.service";
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
-export class DetailsComponent implements OnInit{
+export class DetailsComponent implements OnInit {
 
-  art! : ArtType
+  art!: ArtsType;
 
   constructor(private artService: ArtService,
               private route: ActivatedRoute,
               private favoritesService: FavoritesService
-             ) {
+  ) {
 
   }
 
   ngOnInit() {
     this.route.params.subscribe(event => {
-      this.artService.getArt(+event['id']).subscribe((item: any) => {
-       if (item.data) {
-         this.art = item.data
-       }
-      })
+      this.artService.getArt(+event['id'])
+        .subscribe((item: any ) => {
+            this.art = item.data;
+        })
     });
   }
 
 
-  addToFavorites(event: Event,item: ArtType): void {
+  addToFavorites(event: Event, item: ArtsType): void {
     event.stopPropagation();
     this.favoritesService.addFavorite(item);
   }
 
-  removeFromFavorites(event: Event,itemId: number): void {
+  removeFromFavorites(event: Event, itemId: number): void {
     event.stopPropagation();
     this.favoritesService.removeFromFavorites(itemId);
   }
@@ -50,7 +49,6 @@ export class DetailsComponent implements OnInit{
   isFavorite(itemId: number): boolean {
     return this.favoritesService.isFavorite(itemId);
   }
-
 
 
 }
