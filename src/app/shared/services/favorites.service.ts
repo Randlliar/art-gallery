@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {ArtType} from "@type/art.type";
 import {ArtsType} from "@type/arts.type";
 
 @Injectable({
