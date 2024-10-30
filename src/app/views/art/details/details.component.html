@@ -1,6 +1,7 @@
 <div class="details" *ngIf="art">
   <div class="container">
-    <div class="details-image" style="background-image: url('https://www.artic.edu/iiif/2/{{art.image_id}}/full/800,/0/default.jpg')">
+    <div class="details-image">
+      <img src="https://www.artic.edu/iiif/2/{{art.image_id}}/full/800,/0/default.jpg" alt="">
       <div class="details-add-to-favorites" (click)="isFavorite(art.id) ? removeFromFavorites($event,art.id) : addToFavorites($event,art)"
            [class.active]="isFavorite(art.id) ? 'favorite' : ''">
         <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
