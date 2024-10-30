@@ -44,19 +44,28 @@
 
     @media (max-width: 424px) {
       .small-cards {
-        width: 360px;
+        max-width: 360px;
+      }
+
+      .favorites-main-title {
+        color: rgb(224, 164, 73);
+        font-size: 24px;
+        font-weight: 400;
+        width: 370px;
       }
     }
 
+
     .favorites-title {
       color: rgb(224, 164, 73);
+      font-family: Lexend Deca, sans-serif;
       font-size: 16px;
       font-weight: 400;
     }
 
     .favorites__pre-title {
       color: rgb(57, 57, 57);
-      font-size: 32px;
+      font-size: 24px;
       margin-bottom: 40px;
     }
 
@@ -67,6 +76,8 @@
       margin-bottom: 152px;
       justify-content: center;
     }
+
+
   }
 }
 
