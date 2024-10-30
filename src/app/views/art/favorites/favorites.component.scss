@@ -1,0 +1,83 @@
+.favorites {
+  .container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: Lexend Deca, sans-serif;
+    text-align: center;
+
+    .favorites-main-title {
+      color: rgb(57, 57, 57);
+      font-size: 64px;
+      font-weight: 700;
+      width: 475px;
+      margin: 120px 0;
+
+
+      span {
+        color: rgb(241, 121, 0);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 24px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .favorites-main-title {
+        font-size: 32px;
+        margin: 60px 0;
+        max-width: 425px;
+
+        span {
+          gap: 12px;
+          svg {
+            width: 20px;
+          }
+        }
+      }
+
+      .small-cards {
+        width: 390px;
+      }
+    }
+
+    @media (max-width: 424px) {
+      .small-cards {
+        max-width: 360px;
+      }
+
+      .favorites-main-title {
+        color: rgb(224, 164, 73);
+        font-size: 24px;
+        font-weight: 400;
+        width: 370px;
+      }
+    }
+
+
+    .favorites-title {
+      color: rgb(224, 164, 73);
+      font-family: Lexend Deca, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    .favorites__pre-title {
+      color: rgb(57, 57, 57);
+      font-size: 24px;
+      margin-bottom: 40px;
+    }
+
+    .small-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 152px;
+      justify-content: center;
+    }
+
+
+  }
+}
+

@@ -1,0 +1,51 @@
+<section class="main">
+  <div class="container">
+    <h1 class="main-title">Let's Find Some <span>Art</span> Here!</h1>
+    <div class="main-search">
+      <input type="text" placeholder="Search art, artist, work..." [formControl]="searchControl">
+    </div>
+
+    <div class="sort">
+      <button (click)="sortArts()" *ngIf="sortDirection === 'asc'">Sort by title A-Z</button>
+      <button (click)="sortArts()" *ngIf="sortDirection === 'desc'">Sort by title Z-A</button>
+    </div>
+    <section class="main-gallery">
+      <div class="main-gallery__pre-title">Topics for you</div>
+      <div class="main-gallery__title">Our special gallery</div>
+      <div class="main-gallery-cards">
+        <gallery-card class="main-gallery-card" (click)="getMore(art.id)" [art]="art"
+                      *ngFor="let art of arts| slice:0:3"></gallery-card>
+      </div>
+      <div class="pagination-pages">
+        <svg style="transform: rotate(180deg)" width="10" height="15" viewBox="0 0 10 15" fill="none"
+             xmlns="http://www.w3.org/2000/svg" (click)="openPrevPage()">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M1.46791 13.7144L3 15L9.42788 7.33956L8.9266 6.91893L8.94602 6.89579L1.28558 0.467911L-1.07377e-07 2L6.62963 7.56292L1.46791 13.7144Z"
+                fill="#393939"/>
+        </svg>
+        <a class="pagination-page" *ngIf="this.activeParams.page - 1 > 0"
+           (click)="openPage(this.activeParams.page - 1)" (keydown.enter)="openPage(this.activeParams.page -13)">{{ this.activeParams.page - 1 }}</a>
+        <a class="pagination-page active">{{ this.activeParams.page }}</a>
+        <a class="pagination-page" *ngIf="this.activeParams.page + 1 <= amountOfPages"
+           (click)="openPage(this.activeParams.page + 1)" (keydown.enter)="openPage(this.activeParams.page + 1)">{{ this.activeParams.page + 1 }}</a>
+        <a class="pagination-page" *ngIf="this.activeParams.page + 2 <= amountOfPages"
+           (click)="openPage(this.activeParams.page + 2)" (keydown.enter)="openPage(this.activeParams.page + 2)">{{ this.activeParams.page + 2 }}</a>
+        <a class="pagination-page" *ngIf="this.activeParams.page + 3 <= amountOfPages && this.activeParams.page === 1"
+           (click)="openPage(this.activeParams.page + 3)" (keydown.enter)="openPage(this.activeParams.page + 3)" >{{ this.activeParams.page + 3 }} </a>
+        <svg width="10" height="15" viewBox="0 0 10 15" fill="none" xmlns="http://www.w3.org/2000/svg"
+             (click)="openNextPage()">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M1.46791 13.7144L3 15L9.42788 7.33956L8.9266 6.91893L8.94602 6.89579L1.28558 0.467911L-1.07377e-07 2L6.62963 7.56292L1.46791 13.7144Z"
+                fill="#393939"/>
+        </svg>
+      </div>
+    </section>
+    <section class="other-gallery">
+      <div class="other-gallery__pre-title">Topics for you</div>
+      <div class="other-gallery__title">Our special gallery</div>
+      <div class="small-cards">
+        <small-card (click)="getMore(art.id)" [art]="art" *ngFor="let art of arts| slice:3:arts.length"></small-card>
+      </div>
+    </section>
+  </div>
+</section>
