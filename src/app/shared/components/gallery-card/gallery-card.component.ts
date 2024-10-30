@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NgForOf, NgIf, SlicePipe} from "@angular/common";
 import {ArtsType} from "@type/arts.type";
 import {FavoritesService} from "@services/favorites.service";
@@ -15,14 +15,13 @@ import {FavoritesService} from "@services/favorites.service";
   styleUrl: './gallery-card.component.scss'
 })
 
-export class GalleryCardComponent implements OnInit {
+export class GalleryCardComponent {
 
   @Input() art!: ArtsType;
 
   constructor(private favoritesService: FavoritesService) {}
 
-  ngOnInit() {
-  }
+
 
   addToFavorites(event: Event,item: ArtsType): void {
     event.stopPropagation();

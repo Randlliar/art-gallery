@@ -24,14 +24,14 @@
                 fill="#393939"/>
         </svg>
         <a class="pagination-page" *ngIf="this.activeParams.page - 1 > 0"
-           (click)="openPage(this.activeParams.page - 1)">{{ this.activeParams.page - 1 }}</a>
+           (click)="openPage(this.activeParams.page - 1)" (keydown.enter)="openPage(this.activeParams.page -13)">{{ this.activeParams.page - 1 }}</a>
         <a class="pagination-page active">{{ this.activeParams.page }}</a>
         <a class="pagination-page" *ngIf="this.activeParams.page + 1 <= amountOfPages"
-           (click)="openPage(this.activeParams.page + 1)">{{ this.activeParams.page + 1 }}</a>
+           (click)="openPage(this.activeParams.page + 1)" (keydown.enter)="openPage(this.activeParams.page + 1)">{{ this.activeParams.page + 1 }}</a>
         <a class="pagination-page" *ngIf="this.activeParams.page + 2 <= amountOfPages"
-           (click)="openPage(this.activeParams.page + 2)">{{ this.activeParams.page + 2 }}</a>
+           (click)="openPage(this.activeParams.page + 2)" (keydown.enter)="openPage(this.activeParams.page + 2)">{{ this.activeParams.page + 2 }}</a>
         <a class="pagination-page" *ngIf="this.activeParams.page + 3 <= amountOfPages && this.activeParams.page === 1"
-           (click)="openPage(this.activeParams.page + 3)">{{ this.activeParams.page + 3 }}</a>
+           (click)="openPage(this.activeParams.page + 3)" (keydown.enter)="openPage(this.activeParams.page + 3)" >{{ this.activeParams.page + 3 }} </a>
         <svg width="10" height="15" viewBox="0 0 10 15" fill="none" xmlns="http://www.w3.org/2000/svg"
              (click)="openNextPage()">
           <path fill-rule="evenodd" clip-rule="evenodd"

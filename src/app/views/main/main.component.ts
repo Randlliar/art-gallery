@@ -31,7 +31,7 @@ export class MainComponent implements OnInit {
   private srt: string = '';
   public searchArts: ArtsType[] = [];
   public amountOfPages!: number;
-  public sortingOpen= false;
+  public sortingOpen = false;
 
   public activeParams: ActiveParamsType = {page: 1};
   public sortDirection: 'asc' | 'desc' = 'asc';
@@ -54,7 +54,6 @@ export class MainComponent implements OnInit {
     this.handleSearchInput();
   }
 
-
   private processContent() {
     this.loaderService.show();
     this.activatedRoute.queryParams
@@ -73,8 +72,7 @@ export class MainComponent implements OnInit {
   private getArts() {
     this.loaderService.show();
     this.artService.getArts(this.activeParams)
-      .subscribe((data: ArtsWrapperType ) => {
-        console.log( data)
+      .subscribe((data: ArtsWrapperType) => {
         this.amountOfPages = data.pagination.total_pages;
         this.arts = data.data;
         this.loaderService.hide();

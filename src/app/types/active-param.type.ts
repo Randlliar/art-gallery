@@ -3,4 +3,5 @@ export type ActiveParamsType = {
   page?: any;
   query?: string;
   sort?: string;
+  url?: string;
 }
