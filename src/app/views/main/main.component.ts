@@ -1,16 +1,16 @@
-import {Component, OnInit, signal} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GalleryCardComponent} from "@components/gallery-card/gallery-card.component";
 import {SmallCardComponent} from "@components/small-card/small-card.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ArtService} from "@services/art.service";
 import {NgForOf, NgIf, SlicePipe} from "@angular/common";
 import {ActiveParamsType} from "@type/active-param.type";
-import {debounceTime, distinctUntilChanged, tap} from "rxjs";
+import {debounceTime,} from "rxjs";
 import {LoaderService} from "@services/loader.service";
-import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ArtsType} from "@type/arts.type";
 import {ArtsWrapperType} from "@type/arts-wrapper.type";
 import {PaginationComponent} from "@components/pagination/pagination.component";
+import {SearchComponent} from "@components/search/search.component";
 
 @Component({
   selector: 'app-main',
@@ -20,40 +20,34 @@ import {PaginationComponent} from "@components/pagination/pagination.component";
     SmallCardComponent,
     NgForOf,
     SlicePipe,
-    FormsModule,
     NgIf,
-    ReactiveFormsModule,
-    PaginationComponent
+    PaginationComponent,
+    SearchComponent
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
 export class MainComponent implements OnInit {
-  public arts: ArtsType[] = [];
-  private srt: string = '';
-  public searchArts: ArtsType[] = [];
-  public amountOfPages!: number;
-  public sortingOpen = false;
-
-  public activeParams: ActiveParamsType = {page: 1};
-  public sortDirection: 'asc' | 'desc' = 'asc';
-  public searchControl = new FormControl('');
-  private isSearch = signal(false);
+   arts: ArtsType[] = [];
+   activeParams: ActiveParamsType = {page: 1};
+   sortDirection: 'asc' | 'desc' = 'asc';
+  // data = signal<string>('Исходные данные');
 
 
-  artworks: ArtsType[] = [];
-  isLoading: boolean = false;
+
+
+  // artworks: ArtsType[] = [];
 
   constructor(private router: Router,
               private artService: ArtService,
               private activatedRoute: ActivatedRoute,
-              private loaderService: LoaderService) {
+              private loaderService: LoaderService,
+              ) {
   }
 
 
   ngOnInit() {
     this.processContent();
-    this.handleSearchInput();
   }
 
   private processContent() {
@@ -82,10 +76,6 @@ export class MainComponent implements OnInit {
   }
 
 
-  private getSomeArts(ids: string) {
-    this.artService.getSomeArts(ids)
-      .subscribe((data: ArtsWrapperType) => this.arts = data.data)
-  }
 
   public sortArts() {
     this.artService.getArts(this.activeParams)
@@ -106,16 +96,6 @@ export class MainComponent implements OnInit {
       })
   }
 
-  private getSearchArts() {
-    this.loaderService.show();
-    this.artService.getSearchArts(this.activeParams)
-      .subscribe((data: ArtsWrapperType) => {
-        this.searchArts = data.data;
-        this.srt = data.data.flatMap((item: ArtsType) => item.id).join();
-        this.getSomeArts(this.srt)
-        this.loaderService.hide();
-      })
-  }
 
   public getMore(id: number) {
     this.router.navigate([`/details/${id}`], {
@@ -124,26 +104,5 @@ export class MainComponent implements OnInit {
   }
 
 
-  private handleSearchInput(): void {
-    this.searchControl.valueChanges
-      .pipe(
-        // Add unsubscription pipe
-        debounceTime(500),
-        distinctUntilChanged(),
-        tap((query) => {
-          if (query?.length) {
-            this.isSearch.set(true);
-          } else {
-            this.isSearch.set(false);
-          }
-
-          this.isLoading = true;
-          this.activeParams.page = 1;
-          this.activeParams.query = query ?? '';
-          this.getSearchArts();
-
-        }),
-      ).subscribe();
-  }
 
 }

@@ -1,10 +1,7 @@
 <section class="main">
   <div class="container">
     <h1 class="main-title">Let's Find Some <span>Art</span> Here!</h1>
-    <div class="main-search">
-      <input type="text" placeholder="Search art, artist, work..." [formControl]="searchControl">
-    </div>
-
+    <app-search></app-search>
     <div class="sort">
       <button (click)="sortArts()" *ngIf="sortDirection === 'asc'">Sort by title A-Z</button>
       <button (click)="sortArts()" *ngIf="sortDirection === 'desc'">Sort by title Z-A</button>
@@ -13,8 +10,8 @@
       <div class="main-gallery__pre-title">Topics for you</div>
       <div class="main-gallery__title">Our special gallery</div>
       <div class="main-gallery-cards">
-        <gallery-card class="main-gallery-card" (click)="getMore(art.id)" [art]="art"
-                      *ngFor="let art of arts| slice:0:3"></gallery-card>
+        <app-gallery-card class="main-gallery-card" (click)="getMore(art.id)" [art]="art"
+                      *ngFor="let art of arts| slice:0:3"></app-gallery-card>
       </div>
       <app-pagination></app-pagination>
 
@@ -23,7 +20,7 @@
       <div class="other-gallery__pre-title">Topics for you</div>
       <div class="other-gallery__title">Our special gallery</div>
       <div class="small-cards">
-        <small-card (click)="getMore(art.id)" [art]="art" *ngFor="let art of arts| slice:3:arts.length"></small-card>
+        <app-small-card (click)="getMore(art.id)" [art]="art" *ngFor="let art of arts| slice:3:arts.length"></app-small-card>
       </div>
     </section>
   </div>

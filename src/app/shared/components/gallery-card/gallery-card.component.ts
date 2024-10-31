@@ -4,7 +4,7 @@ import {ArtsType} from "@type/arts.type";
 import {FavoritesService} from "@services/favorites.service";
 
 @Component({
-  selector: 'gallery-card',
+  selector: 'app-gallery-card',
   standalone: true,
   templateUrl: './gallery-card.component.html',
   imports: [
