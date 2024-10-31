@@ -14,7 +14,7 @@
     <div class="favorites-title"  *ngIf="arts.length">Saved by you</div>
     <div class="favorites__pre-title"  *ngIf="arts.length">Your favorites list</div>
     <div class="small-cards" *ngIf="arts.length">
-      <small-card [art]="art" *ngFor="let art of arts" (click)="getMore(art.id)"></small-card>
+      <app-small-card [art]="art" *ngFor="let art of arts" (click)="getMore(art.id)"></app-small-card>
     </div>
     <div class="favorites__pre-title" *ngIf="!arts.length">
       You haven't added any paintings to your favorites yet.
