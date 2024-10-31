@@ -10,6 +10,7 @@ import {LoaderService} from "@services/loader.service";
 import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ArtsType} from "@type/arts.type";
 import {ArtsWrapperType} from "@type/arts-wrapper.type";
+import {PaginationComponent} from "@components/pagination/pagination.component";
 
 @Component({
   selector: 'app-main',
@@ -21,7 +22,8 @@ import {ArtsWrapperType} from "@type/arts-wrapper.type";
     SlicePipe,
     FormsModule,
     NgIf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PaginationComponent
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
@@ -73,7 +75,7 @@ export class MainComponent implements OnInit {
     this.loaderService.show();
     this.artService.getArts(this.activeParams)
       .subscribe((data: ArtsWrapperType) => {
-        this.amountOfPages = data.pagination.total_pages;
+        // this.amountOfPages = data.pagination.total_pages;
         this.arts = data.data;
         this.loaderService.hide();
       })
@@ -113,34 +115,6 @@ export class MainComponent implements OnInit {
         this.getSomeArts(this.srt)
         this.loaderService.hide();
       })
-  }
-
-  public openPage(page: number) {
-    this.activeParams.page = page;
-    this.router.navigate([''], {
-      queryParams: this.activeParams
-    });
-
-  }
-
-  public openNextPage() {
-    this.loaderService.show();
-    if (this.activeParams.page && this.activeParams.page < this.amountOfPages) {
-      this.activeParams.page++;
-      this.router.navigate([''], {
-        queryParams: this.activeParams
-      });
-      this.loaderService.hide();
-    }
-  }
-
-  public openPrevPage() {
-    if (this.activeParams.page && this.activeParams.page > 1) {
-      this.activeParams.page--;
-      this.router.navigate([''], {
-        queryParams: this.activeParams
-      });
-    }
   }
 
   public getMore(id: number) {
