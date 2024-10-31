@@ -1,10 +1,10 @@
-import {Component, Input} from '@angular/core';
+import {Component, input, InputSignal} from '@angular/core';
 import {NgForOf, NgIf, SlicePipe,} from "@angular/common";
 import {ArtsType} from "@type/arts.type";
 import {FavoritesService} from "@services/favorites.service";
 
 @Component({
-  selector: 'small-card',
+  selector: 'app-small-card',
   standalone: true,
   imports: [
     NgForOf,
@@ -14,11 +14,9 @@ import {FavoritesService} from "@services/favorites.service";
   templateUrl: './small-card.component.html',
   styleUrl: './small-card.component.scss'
 })
-export class SmallCardComponent{
+export class SmallCardComponent {
 
-  @Input() art!: ArtsType
-  @Input() arts!: ArtsType[]
-
+  art:InputSignal<any> = input<ArtsType>();
   constructor(private favoritesService: FavoritesService) {
   }
 
@@ -30,11 +28,13 @@ export class SmallCardComponent{
 
   removeFromFavorites(event: Event,itemId: number): void {
     event.stopPropagation();
-    this.favoritesService.removeFromFavorites(itemId);
+    if (itemId) {
+      this.favoritesService.removeFromFavorites(itemId);
+    }
   }
 
   isFavorite(itemId: number): boolean {
-    return this.favoritesService.isFavorite(itemId);
+      return this.favoritesService.isFavorite(itemId);
   }
 
 }

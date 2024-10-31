@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, input, Input, InputSignal} from '@angular/core';
 import {NgForOf, NgIf, SlicePipe} from "@angular/common";
 import {ArtsType} from "@type/arts.type";
 import {FavoritesService} from "@services/favorites.service";
@@ -17,7 +17,8 @@ import {FavoritesService} from "@services/favorites.service";
 
 export class GalleryCardComponent {
 
-  @Input() art!: ArtsType;
+  art:InputSignal<any> = input<ArtsType>();
+
 
   constructor(private favoritesService: FavoritesService) {}
 
