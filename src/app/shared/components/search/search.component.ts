@@ -1,5 +1,5 @@
-import {Component, OnInit, signal} from '@angular/core';
-import {FormControl, ReactiveFormsModule} from "@angular/forms";
+import {Component, Input, input, InputSignal, OnInit, signal} from '@angular/core';
+import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 import {debounceTime, distinctUntilChanged, tap} from "rxjs";
 import {ActiveParamsType} from "@type/active-param.type";
 import {ArtsWrapperType} from "@type/arts-wrapper.type";
@@ -7,6 +7,7 @@ import {ArtsType} from "@type/arts.type";
 import {ArtService} from "@services/art.service";
 import {SmallCardComponent} from "@components/small-card/small-card.component";
 import {SlicePipe} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-search',
@@ -19,15 +20,17 @@ import {SlicePipe} from "@angular/common";
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })
-export class SearchComponent implements OnInit{
-  searchControl:FormControl = new FormControl('');
+export class SearchComponent implements OnInit {
+  searchControl: FormControl = new FormControl('', Validators.required);
   isLoading: boolean = false;
-  private isSearch = signal(false);
-  public activeParams: ActiveParamsType = {page: 1};
+  activeParams: ActiveParamsType = {page: 1};
+  searchArts: ArtsType[] = [];
   private srt: string = '';
-  public searchArts: ArtsType[] = [];
-  public searchedArts: ArtsType[] = [];
-  constructor(private artService: ArtService) {
+  art:InputSignal<any> = input<ArtsType>();
+  private isSearch = signal(false);
+
+  constructor(private artService: ArtService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -51,7 +54,6 @@ export class SearchComponent implements OnInit{
           this.activeParams.page = 1;
           this.activeParams.query = query ?? '';
           this.getSearchArts();
-
         }),
       ).subscribe();
   }
@@ -59,7 +61,6 @@ export class SearchComponent implements OnInit{
   private getSearchArts() {
     this.artService.getSearchArts(this.activeParams)
       .subscribe((data: ArtsWrapperType) => {
-        this.searchArts = data.data;
         this.srt = data.data.flatMap((item: ArtsType) => item.id).join();
         this.getSomeArts(this.srt)
       })
@@ -68,10 +69,14 @@ export class SearchComponent implements OnInit{
   private getSomeArts(ids: string) {
     this.artService.getSomeArts(ids)
       .subscribe((data: ArtsWrapperType) => {
-        this.searchedArts = data.data;
+        this.searchArts = data.data;
         console.log(this.searchArts)
-
       })
   }
 
+  getMore(id: number) {
+    this.router.navigate([`/details/${id}`], {
+      queryParams: null
+    });
+  }
 }

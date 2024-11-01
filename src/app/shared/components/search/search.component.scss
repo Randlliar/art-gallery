@@ -31,6 +31,16 @@
     font-size: 14px;
     font-weight: 400;
   }
+
+  ol {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    li {
+      font-size: 16px;
+      cursor: pointer;
+    }
+  }
 }
 
 
@@ -49,3 +59,4 @@
     }
   }
 }
+
