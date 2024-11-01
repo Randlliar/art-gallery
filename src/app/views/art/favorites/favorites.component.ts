@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {NgForOf, NgIf, SlicePipe} from "@angular/common";
 import {Router} from "@angular/router";
 import {ArtsType} from "@type/arts.type";
 import {SmallCardComponent} from "@components/small-card/small-card.component";
@@ -9,10 +8,7 @@ import {FavoritesService} from "@services/favorites.service";
   selector: 'app-favorites',
   standalone: true,
   imports: [
-    NgForOf,
-    SlicePipe,
     SmallCardComponent,
-    NgIf
   ],
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.scss'

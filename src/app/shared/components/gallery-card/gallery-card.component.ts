@@ -2,6 +2,7 @@ import {Component, input, Input, InputSignal} from '@angular/core';
 import {NgForOf, NgIf, SlicePipe} from "@angular/common";
 import {ArtsType} from "@type/arts.type";
 import {FavoritesService} from "@services/favorites.service";
+import {SvgIconComponent} from "angular-svg-icon";
 
 @Component({
   selector: 'app-gallery-card',
@@ -10,7 +11,8 @@ import {FavoritesService} from "@services/favorites.service";
   imports: [
     SlicePipe,
     NgIf,
-    NgForOf
+    NgForOf,
+    SvgIconComponent
   ],
   styleUrl: './gallery-card.component.scss'
 })
@@ -20,7 +22,8 @@ export class GalleryCardComponent {
   art:InputSignal<any> = input<ArtsType>();
 
 
-  constructor(private favoritesService: FavoritesService) {}
+  constructor(private favoritesService: FavoritesService) {
+  }
 
 
 

@@ -3,7 +3,6 @@ import {GalleryCardComponent} from "@components/gallery-card/gallery-card.compon
 import {SmallCardComponent} from "@components/small-card/small-card.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ArtService} from "@services/art.service";
-import {NgForOf, NgIf, SlicePipe} from "@angular/common";
 import {ActiveParamsType} from "@type/active-param.type";
 import {debounceTime,} from "rxjs";
 import {LoaderService} from "@services/loader.service";
@@ -11,6 +10,7 @@ import {ArtsType} from "@type/arts.type";
 import {ArtsWrapperType} from "@type/arts-wrapper.type";
 import {PaginationComponent} from "@components/pagination/pagination.component";
 import {SearchComponent} from "@components/search/search.component";
+import {SlicePipe} from "@angular/common";
 
 @Component({
   selector: 'app-main',
@@ -18,11 +18,9 @@ import {SearchComponent} from "@components/search/search.component";
   imports: [
     GalleryCardComponent,
     SmallCardComponent,
-    NgForOf,
-    SlicePipe,
-    NgIf,
     PaginationComponent,
-    SearchComponent
+    SearchComponent,
+    SlicePipe
   ],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
@@ -31,10 +29,6 @@ export class MainComponent implements OnInit {
    arts: ArtsType[] = [];
    activeParams: ActiveParamsType = {page: 1};
    sortDirection: 'asc' | 'desc' = 'asc';
-  // data = signal<string>('Исходные данные');
-
-
-
 
   // artworks: ArtsType[] = [];
 
@@ -71,13 +65,14 @@ export class MainComponent implements OnInit {
       .subscribe((data: ArtsWrapperType) => {
         // this.amountOfPages = data.pagination.total_pages;
         this.arts = data.data;
+        console.log(this.arts)
         this.loaderService.hide();
       })
   }
 
 
 
-  public sortArts() {
+   sortArts() {
     this.artService.getArts(this.activeParams)
       .subscribe((data: ArtsWrapperType) => {
         console.log(data.data)
@@ -97,7 +92,7 @@ export class MainComponent implements OnInit {
   }
 
 
-  public getMore(id: number) {
+   getMore(id: number) {
     this.router.navigate([`/details/${id}`], {
       queryParams: null
     });

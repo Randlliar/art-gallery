@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {NgIf, SlicePipe} from "@angular/common";
 import {ArtsType} from "@type/arts.type";
 import {ArtService} from "@services/art.service";
 import {ActivatedRoute} from "@angular/router";
@@ -9,8 +8,6 @@ import {FavoritesService} from "@services/favorites.service";
   selector: 'app-details',
   standalone: true,
   imports: [
-    NgIf,
-    SlicePipe
   ],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'

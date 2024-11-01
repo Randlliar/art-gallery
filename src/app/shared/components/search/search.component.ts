@@ -6,13 +6,15 @@ import {ArtsWrapperType} from "@type/arts-wrapper.type";
 import {ArtsType} from "@type/arts.type";
 import {ArtService} from "@services/art.service";
 import {SmallCardComponent} from "@components/small-card/small-card.component";
+import {SlicePipe} from "@angular/common";
 
 @Component({
   selector: 'app-search',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    SmallCardComponent
+    SmallCardComponent,
+    SlicePipe
   ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
@@ -58,7 +60,6 @@ export class SearchComponent implements OnInit{
     this.artService.getSearchArts(this.activeParams)
       .subscribe((data: ArtsWrapperType) => {
         this.searchArts = data.data;
-        console.log(this.searchArts)
         this.srt = data.data.flatMap((item: ArtsType) => item.id).join();
         this.getSomeArts(this.srt)
       })
@@ -68,6 +69,8 @@ export class SearchComponent implements OnInit{
     this.artService.getSomeArts(ids)
       .subscribe((data: ArtsWrapperType) => {
         this.searchedArts = data.data;
+        console.log(this.searchArts)
+
       })
   }
 

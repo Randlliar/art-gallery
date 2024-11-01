@@ -1,15 +1,13 @@
 import {Component, input, InputSignal} from '@angular/core';
-import {NgForOf, NgIf, SlicePipe,} from "@angular/common";
 import {ArtsType} from "@type/arts.type";
 import {FavoritesService} from "@services/favorites.service";
+import {SlicePipe} from "@angular/common";
 
 @Component({
   selector: 'app-small-card',
   standalone: true,
   imports: [
-    NgForOf,
-    NgIf,
-    SlicePipe,
+    SlicePipe
   ],
   templateUrl: './small-card.component.html',
   styleUrl: './small-card.component.scss'

@@ -1,5 +1,6 @@
 export type ArtsType = {
   image_id: string;
+  alt_image_ids: string;
   title: string;
   artist_title: string;
   is_public_domain: boolean;
