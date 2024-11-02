@@ -1,4 +1,4 @@
-import {Component, input, Input, InputSignal} from '@angular/core';
+import {Component, input, Input, InputSignal, OnInit} from '@angular/core';
 import {NgForOf, NgIf, SlicePipe} from "@angular/common";
 import {ArtsType} from "@type/arts.type";
 import {FavoritesService} from "@services/favorites.service";
@@ -17,28 +17,23 @@ import {SvgIconComponent} from "angular-svg-icon";
   styleUrl: './gallery-card.component.scss'
 })
 
-export class GalleryCardComponent {
+export class GalleryCardComponent implements OnInit {
 
-  art:InputSignal<any> = input<ArtsType>();
-
+  art: InputSignal<any> = input<ArtsType>();
+  isInFavorite: boolean = false;
 
   constructor(private favoritesService: FavoritesService) {
   }
 
-
-
-  addToFavorites(event: Event,item: ArtsType): void {
-    event.stopPropagation();
-    this.favoritesService.addFavorite(item);
+  ngOnInit() {
+    this.isInFavorite = this.favoritesService.isFavorite(this.art().id);
   }
 
-  removeFromFavorites(event: Event,itemId: number): void {
-    event.stopPropagation();
-    this.favoritesService.removeFromFavorites(itemId);
-  }
 
-  isFavorite(itemId: number): boolean {
-    return this.favoritesService.isFavorite(itemId);
+  toggleFavorite(event: Event, item: ArtsType): void {
+    event.stopPropagation();
+    this.isInFavorite = !this.isInFavorite;
+    this.favoritesService.toggleFavorite(item);
   }
 
 }

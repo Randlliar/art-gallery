@@ -1,16 +1,26 @@
 <div class="small-card">
-  @if (art().alt_image_ids.length > 1) { <div class="small-card-image">
-    <img src="https://www.artic.edu/iiif/2/{{art().alt_image_ids | slice: 1 : 2}}/full/800,/0/default.jpg" alt="Image">
+  @if (art().image_id) { <div class="small-card-image">
+    <img src="{{url}}" alt="Image">
   </div>
   }
-  @if (art().alt_image_ids.length === 1) { <div class="small-card-image">
-    <img src="https://www.artic.edu/iiif/2/{{art().alt_image_ids }}/full/800,/0/default.jpg" alt="Image">
-  </div>
-  }
-  @if (art().alt_image_ids.length === 0) { <div class="small-card-image">
+
+
+  @else  { <div class="small-card-image">
     <img src="/assets/images/modsen.png" alt="Image">
   </div>
   }
+
+  <!--  @else if (art().alt_image_ids.length === 1) { <div class="small-card-image">-->
+  <!--    <img src="{{getImage(art().alt_image_ids)}} " alt="Image">-->
+  <!--  </div>-->
+  <!--  }-->
+<!--  @else if (art().alt_image_ids.length > 1)  { <div class="small-card-image">-->
+<!--    <img src="https://www.artic.edu/iiif/2/{{art().alt_image_ids | slice: 1 : 2}}/full/800,/0/default.jpg" alt="Image">-->
+<!--  </div>-->
+<!--  }-->
+<!--<div class="small-card-image">-->
+<!--    <img src="{{getImage(art().image_id)}}" alt="Image">-->
+<!--  </div>-->
 
   <div class="small-card-info">
     <div class="small-card-description">
@@ -21,9 +31,11 @@
       }
     </div>
     <div class="small-card-add-to-favorites"
-         (keydown.enter)="isFavorite(art()?.id) ? removeFromFavorites($event,art()?.id) : addToFavorites($event,art())"
-         (click)="isFavorite(art()?.id) ? removeFromFavorites($event,art()?.id) : addToFavorites($event,art())"
-         [class.active]="isFavorite(art()?.id) ? 'favorite' : ''">
+         (keydown.enter)="toggleFavorite($event, art())"
+         (click)="toggleFavorite($event, art())"
+         [class.active]="isInFavorite ? 'favorite' : ''"
+    >
+
       <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M19.5 21.5L12.375 17.5L5.25 21.5V5.5C5.25 4.96957 5.46448 4.46086 5.84625 4.08579C6.22802 3.71071 6.74581 3.5 7.28571 3.5H17.4643C18.0042 3.5 18.522 3.71071 18.9038 4.08579C19.2855 4.46086 19.5 4.96957 19.5 5.5V21.5Z"

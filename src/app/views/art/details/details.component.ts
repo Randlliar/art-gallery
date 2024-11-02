@@ -15,7 +15,6 @@ import {FavoritesService} from "@services/favorites.service";
 export class DetailsComponent implements OnInit {
 
   art!: ArtsType;
-
   constructor(private artService: ArtService,
               private route: ActivatedRoute,
               private favoritesService: FavoritesService
@@ -32,19 +31,13 @@ export class DetailsComponent implements OnInit {
     });
   }
 
-
-  addToFavorites(event: Event, item: ArtsType): void {
-    event.stopPropagation();
-    this.favoritesService.addFavorite(item);
+  isFavorite(item: ArtsType): boolean {
+    console.log(this.favoritesService.isFavorite(item.id))
+    return this.favoritesService.isFavorite(item.id);
   }
-
-  removeFromFavorites(event: Event, itemId: number): void {
+  toggleFavorite(event: Event,item: ArtsType): void {
     event.stopPropagation();
-    this.favoritesService.removeFromFavorites(itemId);
-  }
-
-  isFavorite(itemId: number): boolean {
-    return this.favoritesService.isFavorite(itemId);
+    this.favoritesService.toggleFavorite(item);
   }
 
 
