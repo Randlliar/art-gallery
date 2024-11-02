@@ -26,7 +26,7 @@ export class SmallCardComponent implements OnInit {
               private http: HttpClient) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getImage(this.art().image_id);
     this.isInFavorite = this.favoritesService.isFavorite(this.art().id);
   }
@@ -39,7 +39,7 @@ export class SmallCardComponent implements OnInit {
   }
 
 
-  getImage(id: string) {
+  getImage(id: string): string {
     this.url = `https://www.artic.edu/iiif/2/${id}/full/800,/0/default.jpg`;
     return this.url;
     // this.http.get(this.url)

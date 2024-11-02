@@ -23,18 +23,18 @@ export class PaginationComponent implements OnInit{
               private artService: ArtService,
               private activatedRoute: ActivatedRoute,) {
   }
-  ngOnInit() {
+  ngOnInit(): void {
     this.processContent();
   }
 
-   openPage(page: number) {
+   openPage(page: number): void {
     this.activeParams.page = page;
     this.router.navigate([''], {
       queryParams: this.activeParams
     });
   }
 
-   openNextPage() {
+   openNextPage(): void {
     if (this.activeParams.page && this.activeParams.page < this.amountOfPages) {
       this.activeParams.page++;
       this.router.navigate([''], {
@@ -43,7 +43,7 @@ export class PaginationComponent implements OnInit{
     }
   }
 
-   openPrevPage() {
+   openPrevPage(): void {
     if (this.activeParams.page && this.activeParams.page > 1) {
       this.activeParams.page--;
       this.router.navigate([''], {
@@ -52,7 +52,7 @@ export class PaginationComponent implements OnInit{
     }
   }
 
-  private processContent() {
+  private processContent(): void {
     this.activatedRoute.queryParams
       .pipe(
         debounceTime(500),
@@ -65,7 +65,7 @@ export class PaginationComponent implements OnInit{
       })
   }
 
-  private getArts() {
+  private getArts(): void {
     this.artService.getArts(this.activeParams)
       .subscribe((data: ArtsWrapperType) => {
         this.amountOfPages = data.pagination.total_pages;

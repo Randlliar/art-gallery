@@ -22,7 +22,7 @@ export class DetailsComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.params.subscribe(event => {
       this.artService.getArt(+event['id'])
         .subscribe((item: any ) => {

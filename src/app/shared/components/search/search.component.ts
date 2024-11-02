@@ -58,7 +58,7 @@ export class SearchComponent implements OnInit {
       ).subscribe();
   }
 
-  private getSearchArts() {
+  private getSearchArts(): void {
     this.artService.getSearchArts(this.activeParams)
       .subscribe((data: ArtsWrapperType) => {
         this.srt = data.data.flatMap((item: ArtsType) => item.id).join();
@@ -66,14 +66,14 @@ export class SearchComponent implements OnInit {
       })
   }
 
-  private getSomeArts(ids: string) {
+  private getSomeArts(ids: string): void {
     this.artService.getSomeArts(ids)
       .subscribe((data: ArtsWrapperType) => {
         this.searchArts = data.data;
       })
   }
 
-  getMore(id: number) {
+  getMore(id: number): void {
     this.router.navigate([`/details/${id}`], {
       queryParams: null
     });

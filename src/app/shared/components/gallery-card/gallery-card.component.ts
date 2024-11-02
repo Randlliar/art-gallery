@@ -25,7 +25,7 @@ export class GalleryCardComponent implements OnInit {
   constructor(private favoritesService: FavoritesService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.isInFavorite = this.favoritesService.isFavorite(this.art().id);
   }
 

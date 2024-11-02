@@ -39,11 +39,11 @@ export class MainComponent implements OnInit {
   }
 
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.processContent();
   }
 
-  private processContent() {
+  private processContent(): void {
     this.loaderService.show();
     this.activatedRoute.queryParams
       .pipe(
@@ -58,18 +58,17 @@ export class MainComponent implements OnInit {
       })
   }
 
-  private getArts() {
+  private getArts(): void {
     this.loaderService.show();
     this.artService.getArts(this.activeParams)
       .subscribe((data: ArtsWrapperType) => {
         this.arts = data.data;
-        console.log(this.arts)
         this.loaderService.hide();
       })
   }
 
 
-  sortArts() {
+  sortArts(): void {
     this.artService.getArts(this.activeParams)
       .subscribe((data: ArtsWrapperType) => {
         this.arts = data.data.sort((a: ArtsType, b: ArtsType) => {
@@ -87,7 +86,7 @@ export class MainComponent implements OnInit {
       })
   }
 
-  getMore(id: number) {
+  getMore(id: number): void {
     this.router.navigate([`/details/${id}`], {
       queryParams: null
     });
