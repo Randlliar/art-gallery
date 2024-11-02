@@ -26,17 +26,16 @@ import {SlicePipe} from "@angular/common";
   styleUrl: './main.component.scss'
 })
 export class MainComponent implements OnInit {
-   arts: ArtsType[] = [];
-   activeParams: ActiveParamsType = {page: 1};
-   sortDirection: 'asc' | 'desc' = 'asc';
+  arts: ArtsType[] = [];
+  activeParams: ActiveParamsType = {page: 1};
+  sortDirection: 'asc' | 'desc' = 'asc';
 
-  // artworks: ArtsType[] = [];
 
   constructor(private router: Router,
               private artService: ArtService,
               private activatedRoute: ActivatedRoute,
               private loaderService: LoaderService,
-              ) {
+  ) {
   }
 
 
@@ -63,7 +62,6 @@ export class MainComponent implements OnInit {
     this.loaderService.show();
     this.artService.getArts(this.activeParams)
       .subscribe((data: ArtsWrapperType) => {
-        // this.amountOfPages = data.pagination.total_pages;
         this.arts = data.data;
         console.log(this.arts)
         this.loaderService.hide();
@@ -71,11 +69,9 @@ export class MainComponent implements OnInit {
   }
 
 
-
-   sortArts() {
+  sortArts() {
     this.artService.getArts(this.activeParams)
       .subscribe((data: ArtsWrapperType) => {
-        console.log(data.data)
         this.arts = data.data.sort((a: ArtsType, b: ArtsType) => {
           if (this.sortDirection === 'asc') {
             if (a.title < b.title) return -1;
@@ -91,13 +87,11 @@ export class MainComponent implements OnInit {
       })
   }
 
-
-   getMore(id: number) {
+  getMore(id: number) {
     this.router.navigate([`/details/${id}`], {
       queryParams: null
     });
   }
-
 
 
 }

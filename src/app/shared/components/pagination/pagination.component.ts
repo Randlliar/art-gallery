@@ -32,7 +32,6 @@ export class PaginationComponent implements OnInit{
     this.router.navigate([''], {
       queryParams: this.activeParams
     });
-       console.log(this.activeParams.page)
   }
 
    openNextPage() {

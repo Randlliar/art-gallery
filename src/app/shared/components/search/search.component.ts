@@ -70,7 +70,6 @@ export class SearchComponent implements OnInit {
     this.artService.getSomeArts(ids)
       .subscribe((data: ArtsWrapperType) => {
         this.searchArts = data.data;
-        console.log(this.searchArts)
       })
   }
 
