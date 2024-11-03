@@ -1,15 +1,27 @@
 <div class="favorites">
   <div class="container">
-    <div class="favorites-main-title">Here Are Your <span>
-      <svg width="37.213867" height="47.278320"
-           viewBox="0 0 37.2139 47.2783" fill="none"
-           xmlns="http://www.w3.org/2000/svg">
-	<defs/>
-	<path id="Vector"
-        d="M18.6 35.46L2.34 44.92L2.34 7.07C2.34 5.82 2.83 4.62 3.7 3.73C4.58 2.84 5.76 2.34 6.99 2.34L30.21 2.34C31.45 2.34 32.63 2.84 33.5 3.73C34.37 4.62 34.86 5.82 34.86 7.07L34.86 44.92L18.6 35.46Z"
-        stroke="#F17900" stroke-opacity="1.000000" stroke-width="4.697649" stroke-linejoin="round"/>
-</svg>
-   Favorites </span>
+    <div class="favorites-main-title">
+      Here Are Your
+      <span>
+        <svg
+          width="37.213867"
+          height="47.278320"
+          viewBox="0 0 37.2139 47.2783"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs />
+          <path
+            id="Vector"
+            d="M18.6 35.46L2.34 44.92L2.34 7.07C2.34 5.82 2.83 4.62 3.7 3.73C4.58 2.84 5.76 2.34 6.99 2.34L30.21 2.34C31.45 2.34 32.63 2.84 33.5 3.73C34.37 4.62 34.86 5.82 34.86 7.07L34.86 44.92L18.6 35.46Z"
+            stroke="#F17900"
+            stroke-opacity="1.000000"
+            stroke-width="4.697649"
+            stroke-linejoin="round"
+          />
+        </svg>
+        Favorites
+      </span>
     </div>
     @if (arts.length) {
       <div class="favorites-title">Saved by you</div>
@@ -18,7 +30,6 @@
       <div class="favorites__pre-title">Your favorites list</div>
     }
     @if (arts.length) {
-
       <div class="small-cards">
         @for (art of arts; track art) {
           <app-small-card [art]="art" (click)="getMore(art.id)"></app-small-card>
@@ -26,9 +37,7 @@
       </div>
     }
     @if (!arts.length) {
-      <div class="favorites__pre-title">
-        You haven't added any paintings to your favorites yet.
-      </div>
+      <div class="favorites__pre-title">You haven't added any paintings to your favorites yet.</div>
     }
   </div>
 </div>

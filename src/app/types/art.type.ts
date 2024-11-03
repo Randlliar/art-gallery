@@ -5,8 +5,8 @@ export type ArtType = {
   artist_title: string;
   artist_display: string;
   place_of_origin: string;
-  dimensions: string
+  dimensions: string;
   credit_line: string;
   department_title: string;
   is_public_domain: string;
-}
+};

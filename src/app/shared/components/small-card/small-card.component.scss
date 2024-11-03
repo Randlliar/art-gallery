@@ -27,7 +27,9 @@
     align-items: center;
 
     .small-card-description {
-      font-family: Lexend Deca, sans-serif;
+      font-family:
+        Lexend Deca,
+        sans-serif;
       display: flex;
       align-items: flex-start;
       flex-direction: column;
@@ -66,13 +68,10 @@
       }
     }
   }
-
-
 }
 
 @media (max-width: 424px) {
-.small-card {
-  width: 360px;
-}
-
+  .small-card {
+    width: 360px;
+  }
 }

@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import {ArtsType} from "@type/arts.type";
+import { ArtsType } from '@type/arts.type';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FavoritesService {
-
   private readonly storageKey = 'favorites';
 
   constructor() {}
@@ -28,7 +27,6 @@ export class FavoritesService {
   }
 
   isFavorite(itemId: number): boolean {
-    return this.getFavorites().some((item: ArtsType):boolean => item.id === itemId);
+    return this.getFavorites().some((item: ArtsType): boolean => item.id === itemId);
   }
-
 }

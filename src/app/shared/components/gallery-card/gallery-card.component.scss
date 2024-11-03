@@ -1,5 +1,5 @@
 .gallery-card {
-cursor: pointer;
+  cursor: pointer;
 
   .container {
     box-sizing: border-box;
@@ -93,12 +93,9 @@ cursor: pointer;
   }
 }
 
-
 @media (max-width: 980px) {
   .gallery-card {
     .container {
-
     }
-
   }
 }

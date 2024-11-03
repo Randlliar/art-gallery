@@ -3,7 +3,9 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    font-family: Lexend Deca, sans-serif;
+    font-family:
+      Lexend Deca,
+      sans-serif;
     text-align: center;
 
     .favorites-main-title {
@@ -12,7 +14,6 @@
       font-weight: 700;
       width: 475px;
       margin: 120px 0;
-
 
       span {
         color: rgb(241, 121, 0);
@@ -55,10 +56,11 @@
       }
     }
 
-
     .favorites-title {
       color: rgb(224, 164, 73);
-      font-family: Lexend Deca, sans-serif;
+      font-family:
+        Lexend Deca,
+        sans-serif;
       font-size: 16px;
       font-weight: 400;
     }
@@ -76,8 +78,5 @@
       margin-bottom: 152px;
       justify-content: center;
     }
-
-
   }
 }
-

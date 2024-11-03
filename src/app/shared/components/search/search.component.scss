@@ -16,7 +16,7 @@
 
   &::after {
     content: '';
-    background-image: url("/assets/images/icons/search.png");
+    background-image: url('/assets/images/icons/search.png');
     background-size: cover;
     position: absolute;
     width: 32px;
@@ -43,7 +43,6 @@
   }
 }
 
-
 @media (max-width: 767px) {
   .search {
     input {
@@ -59,4 +58,3 @@
     }
   }
 }
-

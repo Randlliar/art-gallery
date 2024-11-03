@@ -3,26 +3,32 @@
     <h1 class="main-title">Let's Find Some <span>Art</span> Here!</h1>
     <app-search></app-search>
     <div class="sort">
-      @if (sortDirection=== 'asc')  { <button (click)="sortArts()">Sort by title A-Z</button>}
-      @if (sortDirection=== 'desc')  { <button (click)="sortArts()">Sort by title Z-A</button>}
+      <button (click)="sortArts('title')">
+        Sort by Title {{ sortDirection === 'asc' && sortCriteria === 'title' ? '↑' : '↓' }}
+      </button>
+      <button (click)="sortArts('date')">
+        Sort by Date {{ sortDirection === 'asc' && sortCriteria === 'date' ? '↑' : '↓' }}
+      </button>
     </div>
     <section class="main-gallery">
       <div class="main-gallery__pre-title">Topics for you</div>
       <div class="main-gallery__title">Our special gallery</div>
       <div class="main-gallery-cards">
-        @for (art of arts | slice:0:3; track art) {
-          <app-gallery-card class="main-gallery-card" (click)="getMore(art.id)" [art]="art"
+        @for (art of arts | slice: 0 : 3; track art) {
+          <app-gallery-card
+            class="main-gallery-card"
+            (click)="getMore(art.id)"
+            [art]="art"
           ></app-gallery-card>
         }
       </div>
       <app-pagination></app-pagination>
-
     </section>
     <section class="other-gallery">
       <div class="other-gallery__pre-title">Topics for you</div>
       <div class="other-gallery__title">Our special gallery</div>
       <div class="small-cards">
-        @for (art of arts | slice:3:arts.length; track art) {
+        @for (art of arts | slice: 3 : arts.length; track art) {
           <app-small-card (click)="getMore(art.id)" [art]="art"></app-small-card>
         }
       </div>
