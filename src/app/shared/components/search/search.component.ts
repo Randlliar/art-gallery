@@ -26,9 +26,7 @@ import { specialCharactersOnlyValidator } from 'src/app/shared/validators/specia
   styleUrl: './search.component.scss',
 })
 export class SearchComponent implements OnInit, OnDestroy {
-  formGroup!: FormGroup;
   searchControl: FormControl = new FormControl('', [
-    Validators.required,
     specialCharactersOnlyValidator(),
   ]);
   isLoading: boolean = false;

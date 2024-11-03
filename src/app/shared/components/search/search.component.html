@@ -1,5 +1,5 @@
-<form class="search" [formGroup]="formGroup">
-  <input type="text" placeholder="Search art, artist, work..." [formControl]="searchControl" />
+<form class="search">
+  <input type="text" placeholder="Search art, artist, work..." [formControl]="searchControl"/>
   <ol>
     @if (searchControl.hasError('specialCharactersOnly')) {
       <li>Нельзя вводить только спецсимволы. Пожалуйста, введите корректный текст.</li>
