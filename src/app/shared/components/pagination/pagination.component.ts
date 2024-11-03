@@ -5,6 +5,7 @@ import { ArtsWrapperType } from '@type/arts-wrapper.type';
 import { ArtService } from '@services/art.service';
 import { debounceTime } from 'rxjs';
 import { NgIf } from '@angular/common';
+import {LoaderService} from "@services/loader.service";
 
 @Component({
   selector: 'app-pagination',
@@ -20,10 +21,10 @@ export class PaginationComponent implements OnInit {
   constructor(
     private router: Router,
     private artService: ArtService,
-    private activatedRoute: ActivatedRoute,
+    private loaderService: LoaderService,
   ) {}
   ngOnInit(): void {
-    this.processContent();
+    this.getArts();
   }
 
   openPage(page: number): void {
@@ -31,6 +32,7 @@ export class PaginationComponent implements OnInit {
     this.router.navigate([''], {
       queryParams: this.activeParams,
     });
+
   }
 
   openNextPage(): void {
@@ -51,18 +53,11 @@ export class PaginationComponent implements OnInit {
     }
   }
 
-  private processContent(): void {
-    this.activatedRoute.queryParams.pipe(debounceTime(500)).subscribe((params) => {
-      if (params['page']) {
-        this.activeParams.page = +params['page'];
-      }
-      this.getArts();
-    });
-  }
-
   private getArts(): void {
+    this.loaderService.show();
     this.artService.getArts(this.activeParams).subscribe((data: ArtsWrapperType) => {
       this.amountOfPages = data.pagination.total_pages;
+      this.loaderService.hide();
     });
   }
 }

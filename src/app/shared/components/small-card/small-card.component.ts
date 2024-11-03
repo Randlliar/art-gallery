@@ -37,20 +37,5 @@ export class SmallCardComponent implements OnInit {
   getImage(id: string): string {
     this.url = `https://www.artic.edu/iiif/2/${id}/full/800,/0/default.jpg`;
     return this.url;
-    // this.http.get(this.url)
-    //   .subscribe((response): string => {
-    //       if (response) {
-    //
-    //         // console.log(`Успешный ответ: ${this.url}`);
-    //         return this.url;
-    //       } else {
-    //         // console.log(response)
-    //         return this.url = '/assets/images/modsen.png'
-    //       }
-    //     }, error => {
-    //      this.url = '/assets/images/modsen.png';
-    //       // console.log(`Ошибка запроса: ${error.status} ${error.message}`);
-    //     },
-    //   );
   }
 }

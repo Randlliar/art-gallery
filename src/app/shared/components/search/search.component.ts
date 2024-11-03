@@ -17,6 +17,7 @@ import { SmallCardComponent } from '@components/small-card/small-card.component'
 import { SlicePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { specialCharactersOnlyValidator } from 'src/app/shared/validators/special-characters-validator';
+import {LoaderService} from "@services/loader.service";
 
 @Component({
   selector: 'app-search',
@@ -41,6 +42,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   constructor(
     private artService: ArtService,
     private router: Router,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
@@ -75,21 +77,25 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   private getSearchArts(): void {
+    this.loaderService.show();
     this.artService
       .getSearchArts(this.activeParams)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: ArtsWrapperType): void => {
         this.srt = data.data.flatMap((item: ArtsType) => item.id).join();
         this.getSomeArts(this.srt);
+        this.loaderService.hide();
       });
   }
 
   private getSomeArts(ids: string): void {
+    this.loaderService.show();
     this.artService
       .getSomeArts(ids)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: ArtsWrapperType): void => {
         this.searchArts = data.data;
+        this.loaderService.hide();
       });
   }
 

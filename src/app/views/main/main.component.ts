@@ -48,13 +48,11 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   private processContent(): void {
-    this.loaderService.show();
     this.activatedRoute.queryParams.pipe(debounceTime(500)).subscribe((params) => {
       if (params['page']) {
         this.activeParams.page = +params['page'];
       }
       this.getArts();
-      this.loaderService.hide();
     });
   }
 
@@ -67,6 +65,8 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   sortArts(sortBy: 'title' | 'date'): void {
+    this.loaderService.show();
+
     this.sortCriteria = sortBy;
     this.artService
       .getArts(this.activeParams)
@@ -93,7 +93,9 @@ export class MainComponent implements OnInit, OnDestroy {
           }
         });
         this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+        this.loaderService.hide();
       });
+
   }
 
   getMore(id: number): void {
