@@ -5,7 +5,9 @@
       <li>Нельзя вводить только спецсимволы. Пожалуйста, введите корректный текст.</li>
     } @else {
       @for (art of searchArts | slice: 1 : 5; track art) {
-        <li (click)="getMore(art.id)">
+        <li tabindex="0" (click)="getMore(art.id)"
+            (keydown.enter)="getMore(art.id)"
+        >
           {{ art.title }}
         </li>
       }

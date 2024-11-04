@@ -10,18 +10,6 @@
     </div>
   }
 
-  <!--  @else if (art().alt_image_ids.length === 1) { <div class="small-card-image">-->
-  <!--    <img src="{{getImage(art().alt_image_ids)}} " alt="Image">-->
-  <!--  </div>-->
-  <!--  }-->
-  <!--  @else if (art().alt_image_ids.length > 1)  { <div class="small-card-image">-->
-  <!--    <img src="https://www.artic.edu/iiif/2/{{art().alt_image_ids | slice: 1 : 2}}/full/800,/0/default.jpg" alt="Image">-->
-  <!--  </div>-->
-  <!--  }-->
-  <!--<div class="small-card-image">-->
-  <!--    <img src="{{getImage(art().image_id)}}" alt="Image">-->
-  <!--  </div>-->
-
   <div class="small-card-info">
     <div class="small-card-description">
       <div class="small-card-description__name">{{ art()?.title | slice: 0 : 20 }}...</div>
@@ -30,7 +18,7 @@
         <div class="small-card-description__state">Public</div>
       }
     </div>
-    <div
+    <div tabindex="0"
       class="small-card-add-to-favorites"
       (keydown.enter)="toggleFavorite($event, art())"
       (click)="toggleFavorite($event, art())"

@@ -3,9 +3,10 @@
     <div class="container">
       <div class="details-image">
         <img src="https://www.artic.edu/iiif/2/{{ art.image_id }}/full/800,/0/default.jpg" alt="" />
-        <div
+        <div tabindex="0"
           class="details-add-to-favorites"
           (click)="toggleFavorite($event, art)"
+          (keydown.enter)="toggleFavorite($event, art)"
           [class.active]="isFavorite(art) ? 'favorite' : ''"
         >
           <svg
