@@ -60,39 +60,6 @@
         display: flex;
         gap: 59px;
       }
-
-      .pagination-pages {
-        margin-top: 94px;
-        margin-bottom: 120px;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 10px;
-
-        svg {
-          cursor: pointer;
-        }
-
-        .pagination-page {
-          font-family: 'Lexend Deca', sans-serif;
-          font-size: 18px;
-          font-weight: 300;
-          width: 30px;
-          height: 30px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-decoration: none;
-          cursor: pointer;
-
-          &.active {
-            font-weight: 600;
-            border-radius: 4px;
-            background: rgb(241, 121, 0);
-            color: rgb(255, 255, 255);
-          }
-        }
-      }
     }
 
     .other-gallery {
@@ -160,6 +127,10 @@
             }
           }
         }
+      }
+
+      .sort {
+        flex-direction: column;
       }
     }
   }

@@ -34,7 +34,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   activeParams: ActiveParamsType = { page: 1 };
   searchArts: ArtsType[] = [];
   art: InputSignal<ArtsType | undefined> = input<ArtsType>();
-  isSearch: WritableSignal<boolean> = signal(false);
+  isSearch = signal(false);
   private srt: string = '';
   private destroy$:Subject<void> = new Subject<void>();
 
@@ -91,7 +91,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         tap((query) => {
           if (query?.length) {
             this.isSearch.set(true);
-          } else {
+          } else if (!query?.length) {
             this.isSearch.set(false);
           }
 

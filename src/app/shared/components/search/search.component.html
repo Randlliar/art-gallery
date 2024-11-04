@@ -2,7 +2,7 @@
   <input type="text" placeholder="Search art, artist, work..." [formControl]="searchControl"/>
   <ol>
     @if (searchControl.hasError('specialCharactersOnly')) {
-      <li>Нельзя вводить только спецсимволы. Пожалуйста, введите корректный текст.</li>
+      <li>Russian characters or only special characters cannot be entered. Please enter correct text.</li>
     } @else {
       @for (art of searchArts | slice: 1 : 5; track art) {
         <li tabindex="0" (click)="getMore(art.id)"
