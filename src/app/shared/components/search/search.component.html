@@ -3,7 +3,7 @@
   <ol>
     @if (searchControl.hasError('specialCharactersOnly')) {
       <li>Russian characters or only special characters cannot be entered. Please enter correct text.</li>
-    } @else {
+    } @else if (isSearch()) {
       @for (art of searchArts | slice: 1 : 5; track art) {
         <li tabindex="0" (click)="getMore(art.id)"
             (keydown.enter)="getMore(art.id)"
