@@ -1,10 +1,7 @@
-import { Component, input, InputSignal, OnDestroy, OnInit } from '@angular/core';
+import { Component, input, InputSignal, OnInit } from '@angular/core';
 import { ArtsType } from '@type/arts.type';
 import { FavoritesService } from '@services/favorites.service';
 import { NgOptimizedImage, SlicePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { catchError, Subscription, throwError } from 'rxjs';
-import { log } from '@angular-devkit/build-angular/src/builders/ssr-dev-server';
 
 @Component({
   selector: 'app-small-card',
@@ -20,7 +17,6 @@ export class SmallCardComponent implements OnInit {
 
   constructor(
     private favoritesService: FavoritesService,
-    private http: HttpClient,
   ) {}
 
   ngOnInit(): void {

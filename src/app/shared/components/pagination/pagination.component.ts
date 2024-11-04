@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActiveParamsType } from '@type/active-param.type';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ArtsWrapperType } from '@type/arts-wrapper.type';
 import { ArtService } from '@services/art.service';
-import { debounceTime } from 'rxjs';
 import { NgIf } from '@angular/common';
 import {LoaderService} from "@services/loader.service";
 
@@ -53,7 +52,7 @@ export class PaginationComponent implements OnInit {
     }
   }
 
-  private getArts(): void {
+  getArts(): void {
     this.loaderService.show();
     this.artService.getArts(this.activeParams).subscribe((data: ArtsWrapperType) => {
       this.amountOfPages = data.pagination.total_pages;

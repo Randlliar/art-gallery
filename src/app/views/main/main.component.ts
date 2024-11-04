@@ -47,8 +47,10 @@ export class MainComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  private processContent(): void {
-    this.activatedRoute.queryParams.pipe(debounceTime(500)).subscribe((params) => {
+   processContent(): void {
+    this.activatedRoute.queryParams
+      .pipe(takeUntil(this.destroy$),debounceTime(500))
+      .subscribe((params) => {
       if (params['page']) {
         this.activeParams.page = +params['page'];
       }
@@ -56,9 +58,10 @@ export class MainComponent implements OnInit, OnDestroy {
     });
   }
 
-  private getArts(): void {
+  getArts(): void {
     this.loaderService.show();
-    this.artService.getArts(this.activeParams).subscribe((data: ArtsWrapperType) => {
+    this.artService.getArts(this.activeParams)
+      .subscribe((data: ArtsWrapperType) => {
       this.arts = data.data;
       this.loaderService.hide();
     });
@@ -66,7 +69,6 @@ export class MainComponent implements OnInit, OnDestroy {
 
   sortArts(sortBy: 'title' | 'date'): void {
     this.loaderService.show();
-
     this.sortCriteria = sortBy;
     this.artService
       .getArts(this.activeParams)
@@ -76,7 +78,6 @@ export class MainComponent implements OnInit, OnDestroy {
           let valueA;
           let valueB;
 
-          // Определяем значения для сортировки в зависимости от критерия
           if (sortBy === 'title') {
             valueA = a.title.toLowerCase();
             valueB = b.title.toLowerCase();
@@ -85,7 +86,6 @@ export class MainComponent implements OnInit, OnDestroy {
             valueB = b.source_updated_at;
           }
 
-          // Сравнение значений на основе направления сортировки
           if (this.sortDirection === 'asc') {
             return valueA < valueB ? -1 : valueA > valueB ? 1 : 0;
           } else {

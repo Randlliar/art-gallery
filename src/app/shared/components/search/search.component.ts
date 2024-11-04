@@ -7,7 +7,7 @@ import {
   signal,
   WritableSignal,
 } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, Subject, takeUntil, tap } from 'rxjs';
 import { ActiveParamsType } from '@type/active-param.type';
 import { ArtsWrapperType } from '@type/arts-wrapper.type';
@@ -33,11 +33,10 @@ export class SearchComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   activeParams: ActiveParamsType = { page: 1 };
   searchArts: ArtsType[] = [];
-  art: InputSignal<any> = input<ArtsType>();
-
+  art: InputSignal<ArtsType | undefined> = input<ArtsType>();
+  isSearch: WritableSignal<boolean> = signal(false);
   private srt: string = '';
-  private isSearch: WritableSignal<boolean> = signal(false);
-  private destroy$ = new Subject<void>();
+  private destroy$:Subject<void> = new Subject<void>();
 
   constructor(
     private artService: ArtService,
@@ -52,6 +51,35 @@ export class SearchComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  getSearchArts(): void {
+    this.loaderService.show();
+    this.artService
+      .getSearchArts(this.activeParams)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: ArtsWrapperType): void => {
+        this.srt = data.data.flatMap((item: ArtsType) => item.id).join();
+        this.getSomeArts(this.srt);
+        this.loaderService.hide();
+      });
+  }
+
+  getSomeArts(ids: string): void {
+    this.loaderService.show();
+    this.artService
+      .getSomeArts(ids)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: ArtsWrapperType): void => {
+        this.searchArts = data.data;
+        this.loaderService.hide();
+      });
+  }
+
+  getMore(id: number): void {
+    this.router.navigate([`/details/${id}`], {
+      queryParams: null,
+    });
   }
 
   private handleSearchInput(): void {
@@ -74,34 +102,5 @@ export class SearchComponent implements OnInit, OnDestroy {
         }),
       )
       .subscribe();
-  }
-
-  private getSearchArts(): void {
-    this.loaderService.show();
-    this.artService
-      .getSearchArts(this.activeParams)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: ArtsWrapperType): void => {
-        this.srt = data.data.flatMap((item: ArtsType) => item.id).join();
-        this.getSomeArts(this.srt);
-        this.loaderService.hide();
-      });
-  }
-
-  private getSomeArts(ids: string): void {
-    this.loaderService.show();
-    this.artService
-      .getSomeArts(ids)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: ArtsWrapperType): void => {
-        this.searchArts = data.data;
-        this.loaderService.hide();
-      });
-  }
-
-  getMore(id: number): void {
-    this.router.navigate([`/details/${id}`], {
-      queryParams: null,
-    });
   }
 }
