@@ -90,7 +90,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/assets/styles.scss"
+              "src/assets/styles/styles.scss"
             ],
             "scripts": [],
             "karmaConfig": "karma.conf.js"
