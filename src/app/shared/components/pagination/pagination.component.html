@@ -16,7 +16,7 @@
     />
   </svg>
   @if (this.activeParams.page - 1 > 0) {
-    <a
+    <a tabindex="0"
       class="pagination-page"
       (click)="openPage(this.activeParams.page - 1)"
       (keydown.enter)="openPage(this.activeParams.page - 1)"
@@ -28,7 +28,7 @@
     {{ this.activeParams.page }}
   </a>
   @if (this.activeParams.page + 1 <= amountOfPages) {
-    <a
+    <a tabindex="0"
       class="pagination-page"
       (click)="openPage(this.activeParams.page + 1)"
       (keydown.enter)="openPage(this.activeParams.page + 1)"
@@ -37,7 +37,7 @@
     </a>
   }
   @if (this.activeParams.page + 2 <= amountOfPages) {
-    <a
+    <a tabindex="0"
       class="pagination-page"
       (click)="openPage(this.activeParams.page + 2)"
       (keydown.enter)="openPage(this.activeParams.page + 2)"
@@ -46,7 +46,7 @@
     </a>
   }
   @if (this.activeParams.page + 3 <= amountOfPages && this.activeParams.page === 1) {
-    <a
+    <a tabindex="0"
       class="pagination-page"
       (click)="openPage(this.activeParams.page + 3)"
       (keydown.enter)="openPage(this.activeParams.page + 3)"
