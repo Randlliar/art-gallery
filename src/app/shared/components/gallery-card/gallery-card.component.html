@@ -1,44 +1,55 @@
-<div class="gallery-card" id="{{art.id}}">
+<div class="gallery-card" id="{{ art().id }}">
   <div class="container">
-    <div class="gallery-card-image" *ngIf="art.image_id">
-      <img src="https://www.artic.edu/iiif/2/{{art.image_id}}/full/800,/0/default.jpg" alt="Image">
-    </div>
-    <div class="gallery-card-image" *ngIf="!art.image_id">
-      <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="0.5" y="0.5" width="79" height="79" stroke="#E0A449"/>
-        <path d="M18.2205 64H61.2205" stroke="#E0A449" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M25.2205 55V38" stroke="#E0A449" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M35.2205 55V38" stroke="#E0A449" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M44.2205 55V38" stroke="#E0A449" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M54.2205 55V38" stroke="#E0A449" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M39.2204 16L58.2205 28H20.2205L39.2204 16Z" stroke="#E0A449" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
+    @if (art().image_id) {
+      <div class="gallery-card-image">
+        <img
+          src="https://www.artic.edu/iiif/2/{{ art().image_id }}/full/800,/0/default.jpg"
+          alt="Image"
+        />
+      </div>
+    } @else if (art().alt_image_ids.length > 1) {
+      <div class="gallery-card-image">
+        <img
+          src="https://www.artic.edu/iiif/2/{{
+            art().alt_image_ids | slice: 1 : 2
+          }}/full/800,/0/default.jpg"
+          alt="Image"
+        />
+      </div>
+    } @else if (art().alt_image_ids.length === 1) {
+      <div class="gallery-card-image">
+        <img
+          src="https://www.artic.edu/iiif/2/{{ art().alt_image_ids }}/full/800,/0/default.jpg"
+          alt="Image"
+        />
+      </div>
+    } @else {
+      <div class="gallery-card-image">
+        <img src="/assets/images/modsen.png" alt="Image" />
+      </div>
+    }
+
     <div class="gallery-card-description">
       <div class="gallery-card-description-text">
-        <div class="gallery-card-description__name">{{ art.title | slice: 0 : 20 }}...</div>
-        <div class="gallery-card-description__author">{{ art.artist_title }}</div>
-        <div class="gallery-card-description__state" *ngIf="art.is_public_domain">Public</div>
+        <div class="gallery-card-description__name">{{ art().title | slice: 0 : 20 }}...</div>
+        <div class="gallery-card-description__author">{{ art().artist_title }}</div>
+        @if (art().is_public_domain) {
+          <div class="gallery-card-description__state">Public</div>
+        }
       </div>
-      <div class="gallery-card-description-favorites "
-           (click)="isFavorite(art.id) ? removeFromFavorites($event,art.id) : addToFavorites($event,art)"
-           [class.active]="isFavorite(art.id) ? 'favorite' : ''">
-        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M19.5 21.5L12.375 17.5L5.25 21.5V5.5C5.25 4.96957 5.46448 4.46086 5.84625 4.08579C6.22802 3.71071 6.74581 3.5 7.28571 3.5H17.4643C18.0042 3.5 18.522 3.71071 18.9038 4.08579C19.2855 4.46086 19.5 4.96957 19.5 5.5V21.5Z"
-            stroke="#E0A449" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+      <div
+        class="gallery-card-description-favorites"
+        (keydown.enter)="toggleFavorite($event, art())"
+        (click)="toggleFavorite($event, art())"
+        [class.active]="isInFavorite ? 'favorite' : ''"
+      >
+                <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M19.5 21.5L12.375 17.5L5.25 21.5V5.5C5.25 4.96957 5.46448 4.46086 5.84625 4.08579C6.22802 3.71071 6.74581 3.5 7.28571 3.5H17.4643C18.0042 3.5 18.522 3.71071 18.9038 4.08579C19.2855 4.46086 19.5 4.96957 19.5 5.5V21.5Z"
+                    stroke="#E0A449" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+<!--        <svg-icon src="src/assets/images/icons/bookmark.svg"></svg-icon>-->
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-

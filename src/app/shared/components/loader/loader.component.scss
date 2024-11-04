@@ -4,7 +4,7 @@
   height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(74, 74, 74, .8);
+  background-color: rgba(74, 74, 74, 0.8);
   z-index: 99999;
   display: flex;
   align-items: center;
@@ -12,8 +12,8 @@
 }
 
 .loader {
-  border: 6px solid #f3f3f3; /* Light gray */
-  border-top: 6px solid #3498db; /* Blue */
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid rgb(224, 164, 73);
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -22,6 +22,10 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

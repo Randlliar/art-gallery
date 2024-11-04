@@ -1,3 +1,5 @@
-<div class="overlay" *ngIf="isShowed">
-  <div class="loader"></div>
-</div>
+@if (isShowed) {
+  <div class="overlay">
+    <div class="loader"></div>
+  </div>
+}

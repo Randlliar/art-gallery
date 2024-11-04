@@ -1,6 +1,6 @@
-import {ArtsType} from "@type/arts.type";
+import { ArtsType } from '@type/arts.type';
 
 export type ArtsWrapperType = {
-  data: ArtsType[] ;
+  data: ArtsType[];
   pagination: ArtsType;
-}
+};

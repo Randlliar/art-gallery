@@ -41,13 +41,14 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      font-family: Lexend Deca, sans-serif;
+      font-family:
+        Lexend Deca,
+        sans-serif;
       font-weight: 400;
       color: rgb(57, 57, 57);
       max-width: 640px;
 
       .details-text-about {
-
         .details-about-description {
           font-size: 32px;
           margin-bottom: 32px;
@@ -84,21 +85,21 @@
 }
 
 @media (max-width: 1300px) {
-.details {
-  .container {
-    .details-image {
-      margin: 0 40px;
-      width: 420px;
-      height: 570px;
-      position: relative;
-      img {
-        background-size: cover;
-        background-repeat: no-repeat;
+  .details {
+    .container {
+      .details-image {
+        margin: 0 40px;
+        width: 420px;
+        height: 570px;
         position: relative;
+        img {
+          background-size: cover;
+          background-repeat: no-repeat;
+          position: relative;
+        }
       }
     }
   }
-}
 }
 
 @media (max-width: 1023px) {

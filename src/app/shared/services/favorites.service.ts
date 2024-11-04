@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import {ArtsType} from "@type/arts.type";
+import { ArtsType } from '@type/arts.type';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FavoritesService {
-
   private readonly storageKey = 'favorites';
 
   constructor() {}
@@ -15,20 +14,19 @@ export class FavoritesService {
     return favorites ? JSON.parse(favorites) : [];
   }
 
-  addFavorite(item: ArtsType): void {
+  toggleFavorite(item: ArtsType): void {
     const favorites: ArtsType[] = this.getFavorites();
-    if (!favorites.find((fav: ArtsType) => fav.id === item.id)) {
+    const itemIndex = favorites.findIndex((fav: ArtsType) => fav.id === item.id);
+    if (itemIndex !== -1) {
+      favorites.splice(itemIndex, 1);
+    } else {
       favorites.push(item);
-      localStorage.setItem(this.storageKey, JSON.stringify(favorites));
     }
-  }
 
-  removeFromFavorites(itemId: number): void {
-    const favorites: ArtsType[] = this.getFavorites().filter((item: ArtsType) => item.id !== itemId);
     localStorage.setItem(this.storageKey, JSON.stringify(favorites));
   }
 
   isFavorite(itemId: number): boolean {
-    return this.getFavorites().some((item: ArtsType) => item.id === itemId);
+    return this.getFavorites().some((item: ArtsType): boolean => item.id === itemId);
   }
 }

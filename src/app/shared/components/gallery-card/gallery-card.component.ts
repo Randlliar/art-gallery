@@ -1,40 +1,27 @@
-import {Component, Input} from '@angular/core';
-import {NgForOf, NgIf, SlicePipe} from "@angular/common";
-import {ArtsType} from "@type/arts.type";
-import {FavoritesService} from "@services/favorites.service";
-
+import { Component, input, InputSignal, OnInit } from '@angular/core';
+import { SlicePipe } from '@angular/common';
+import { ArtsType } from '@type/arts.type';
+import { FavoritesService } from '@services/favorites.service';
 @Component({
-  selector: 'gallery-card',
+  selector: 'app-gallery-card',
   standalone: true,
   templateUrl: './gallery-card.component.html',
-  imports: [
-    SlicePipe,
-    NgIf,
-    NgForOf
-  ],
-  styleUrl: './gallery-card.component.scss'
+  imports: [SlicePipe ],
+  styleUrl: './gallery-card.component.scss',
 })
-
-export class GalleryCardComponent {
-
-  @Input() art!: ArtsType;
+export class GalleryCardComponent implements OnInit {
+  art: InputSignal<any> = input<ArtsType>();
+  isInFavorite: boolean = false;
 
   constructor(private favoritesService: FavoritesService) {}
 
+  ngOnInit(): void {
+    this.isInFavorite = this.favoritesService.isFavorite(this.art().id);
+  }
 
-
-  addToFavorites(event: Event,item: ArtsType): void {
+  toggleFavorite(event: Event, item: ArtsType): void {
     event.stopPropagation();
-    this.favoritesService.addFavorite(item);
+    this.isInFavorite = !this.isInFavorite;
+    this.favoritesService.toggleFavorite(item);
   }
-
-  removeFromFavorites(event: Event,itemId: number): void {
-    event.stopPropagation();
-    this.favoritesService.removeFromFavorites(itemId);
-  }
-
-  isFavorite(itemId: number): boolean {
-    return this.favoritesService.isFavorite(itemId);
-  }
-
 }
