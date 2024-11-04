@@ -1,14 +1,12 @@
-import { Component, input, Input, InputSignal, OnInit } from '@angular/core';
-import { NgForOf, NgIf, SlicePipe } from '@angular/common';
+import { Component, input, InputSignal, OnInit } from '@angular/core';
+import { SlicePipe } from '@angular/common';
 import { ArtsType } from '@type/arts.type';
 import { FavoritesService } from '@services/favorites.service';
-import { SvgIconComponent } from 'angular-svg-icon';
-
 @Component({
   selector: 'app-gallery-card',
   standalone: true,
   templateUrl: './gallery-card.component.html',
-  imports: [SlicePipe, NgIf, NgForOf, SvgIconComponent],
+  imports: [SlicePipe ],
   styleUrl: './gallery-card.component.scss',
 })
 export class GalleryCardComponent implements OnInit {
